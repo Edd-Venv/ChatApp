@@ -10,7 +10,7 @@
   overflow-y: auto;
 }
 .BackGroundImg {
-  background-image: url("../../../assets/Images/background/mapBackground.jpg");
+  background-image: url("../../../assets/images/background/chatbackground.jpg");
   background-size: contain;
   position: fixed;
   left: 0;

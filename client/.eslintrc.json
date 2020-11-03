@@ -28,6 +28,16 @@
     "react/forbid-prop-types": "off",
     "import/no-unresolved": "off",
     "prefer-object-spread": "off",
-    "linebreak-style": "off"
+    "linebreak-style": "off",
+    "curly":"off",
+    "nonblock-statement-body-position": "off",
+    "arrow-body-style": "off",
+    "react/require-default-props": "warn",
+    "jsx-a11y/click-events-have-key-events": "warn",
+    "jsx-a11y/no-static-element-interactions": "warn",
+    "operator-linebreak": "off",
+    "import/extensions": "off",
+    "react/button-has-type": "off",
+    "comma-dangle": "off"
   }
 }

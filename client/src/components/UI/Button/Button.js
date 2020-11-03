@@ -4,13 +4,15 @@ import classes from "./Button.module.css";
 
 const button = (props) => {
   const assignedClasses = [classes.Button, props.className].join(" ");
+  const { type, buttonClick, children } = props;
+
   return (
     <button
       className={assignedClasses}
-      type={props.type}
-      onClick={props.buttonClick}
+      type={props.type ? type : "submit"}
+      onClick={buttonClick}
     >
-      {props.children}
+      {children}
     </button>
   );
 };

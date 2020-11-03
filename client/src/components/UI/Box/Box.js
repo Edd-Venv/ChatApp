@@ -1,5 +1,13 @@
 import React from "react";
+import PropTypes from "proptypes";
 import classes from "./Box.module.css";
 
-const Box = (props) => <div className={classes.Box}>{props.children}</div>;
+const Box = (props) => {
+  const { children } = props;
+  return <div className={classes.Box}>{children}</div>;
+};
+
+Box.propTypes = {
+  children: PropTypes.object,
+};
 export default Box;

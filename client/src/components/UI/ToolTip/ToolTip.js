@@ -10,13 +10,14 @@ const handleToolTip = (tooltipId, inputId, formId, errorMassage) => {
       const hostElement = document.getElementById(formId);
       const hostElPosLeft = hostElement.offsetLeft;
       const hostElPosTop = hostElement.offsetTop;
-      const hostElHeight = hostElement.clientHeight;
+
+      // const hostElHeight = hostElement.clientHeight;
 
       const x = hostElPosLeft + 50;
       const y = hostElPosTop - 68;
       toolTip.className = classes.ToolTip;
-      toolTip.style.left = x + "px";
-      toolTip.style.top = y + "px";
+      toolTip.style.left = `${x}px`;
+      toolTip.style.top = `${y}px`;
       toolTip.innerHTML = errorMassage;
     }
   }
