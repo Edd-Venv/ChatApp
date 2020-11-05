@@ -13,11 +13,11 @@
   },
   "plugins": ["react"],
   "rules": {
-    "prefer-destructuring": "off",
-    "arrow-spacing": "off",
-    "camelcase": "off",
-    "sort-imports": "off",
-    "no-unused-vars": "off",
+    "prefer-destructuring": "warn",
+    "arrow-spacing": "warn",
+    "camelcase": "warn",
+    "sort-imports": "warn",
+    "no-unused-vars": "warn",
     "jsx-quotes": "off",
     "quotes": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
@@ -29,17 +29,6 @@
     "import/no-unresolved": "off",
     "prefer-object-spread": "off",
     "linebreak-style": "off",
-    "curly":"off",
-    "nonblock-statement-body-position": "off",
-    "arrow-body-style": "off",
-    "react/require-default-props": "off",
-    "jsx-a11y/click-events-have-key-events": "off",
-    "jsx-a11y/no-static-element-interactions": "off",
-    "operator-linebreak": "off",
-    "import/extensions": "off",
-    "react/button-has-type": "off",
-    "comma-dangle": "off",
-    "import/no-cycle": "off",
-    "object-curly-newline": "off"
+    "react/react-in-jsx-scope" : "off"
   }
 }
