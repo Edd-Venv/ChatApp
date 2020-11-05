@@ -29,6 +29,12 @@
     "import/no-unresolved": "off",
     "prefer-object-spread": "off",
     "linebreak-style": "off",
-    "react/react-in-jsx-scope" : "off"
+    "react/react-in-jsx-scope" : "off",
+    "operator-linebreak": "off",
+    "import/extensions": "off",
+    "react/button-has-type": "off",
+    "comma-dangle": "off",
+    "import/no-cycle": "off",
+    "object-curly-newline": "off"
   }
 }

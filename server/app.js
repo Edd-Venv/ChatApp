@@ -1,8 +1,11 @@
 const app = require("express")();
-const bodyParser = require("body-parser");
 const path = require("path");
+const express = require("express");
+const bodyParser = require("body-parser");
 const multer = require("multer");
 const compression = require("compression");
+
+const signUpRouter = require("./routes/signUp");
 
 const fileStorage = multer.memoryStorage({
   destination: (req, file, cb) => {
@@ -22,6 +25,11 @@ app.use(multer({ storage: fileStorage, fileFilter }).single("photo"));
 app.use(compression());
 app.use(bodyParser.json());
 
+app.use(
+  "/public/icons",
+  express.static(path.join(__dirname, "public", "icons"))
+);
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -32,10 +40,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => {
-  console.log("get hit");
-  //res.sendFile(__dirname + "/index.html");
-});
+app.use(signUpRouter);
 
 app.use((error, req, res, next) => {
   const status = error.statusCode || 500;
