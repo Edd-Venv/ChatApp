@@ -9,7 +9,7 @@ import SignUp from "./components/Pages/SignUp/SignUp";
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 import MessageForm from "./components/UI/Form/MessageForm/MessageForm";
 
-export const socket = io("http://localhost:4040");
+export const socket = io("ws://localhost:4040");
 export const BaseUrl = "http://localhost:4040";
 
 function App() {
