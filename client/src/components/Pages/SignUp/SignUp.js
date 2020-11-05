@@ -34,7 +34,7 @@ function SignUp() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
-    formData.append("username", name);
+    formData.append("person_name", name);
     formData.append("password", password);
 
     if (file) formData.append("photo", file);
@@ -46,7 +46,8 @@ function SignUp() {
       })
         .then((res) => res.json())
         .then((res) => {
-          if (res.status === "ok") {
+          console.log(res);
+          if (res.status === "success") {
             dispath({
               jwt: res.jwt,
               authenicated: true,
