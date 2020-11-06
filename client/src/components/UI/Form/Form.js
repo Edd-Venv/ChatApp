@@ -25,7 +25,7 @@ const form = (props) => {
     signInOptions = (
       <div>
         <span className={classes.Login_account}>
-          Don`&apos;`t have an account?
+          Don&apos;t have an account?
         </span>
         <Link className={classes.Login_signin} to="/signup">
           Sign Up

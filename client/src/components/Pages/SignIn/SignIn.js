@@ -1,14 +1,15 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { Redirect } from "react-router-dom";
+import { AuthContext } from "../../../contexts/auth/authContext";
 import toolTip from "../../UI/ToolTip/ToolTip";
 import { BaseUrl } from "../../../App";
 import Form from "../../UI/Form/Form";
 
-function SignUp() {
+function SignIn() {
   const firstInputRef = useRef();
   const secondInputRef = useRef();
   const [name, setName] = useState("");
-  const [file, setFile] = useState(null);
+  const [, dispath] = useContext(AuthContext);
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
 
@@ -19,10 +20,6 @@ function SignUp() {
   const handleChange = (event) => {
     if (event.target.name === "name") setName(event.target.value.toUpperCase());
     else if (event.target.name === "password") setPassword(event.target.value);
-    else {
-      const blob = new Blob([event.target.files[0]], { type: "image/jpeg" });
-      setFile(blob);
-    }
   };
 
   const onfirstInputKeyDown = (event) => {
@@ -31,25 +28,33 @@ function SignUp() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData();
-    formData.append("person_name", name);
-    formData.append("password", password);
-
-    if (file) formData.append("photo", file);
 
     try {
-      fetch(`${BaseUrl}/sign-up`, {
+      fetch(`${BaseUrl}/sign-in`, {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          person_name: name,
+          password,
+        }),
       })
         .then((res) => {
           return res.json();
         })
         .then((res) => {
-          if (res.status === "success") setRedirect(true);
-          else throw new Error(res.message);
+          console.log(res);
+          if (res.status === "success") {
+            dispath({
+              jwt: res.jwt,
+              authenicated: true,
+              userId: res.userId,
+              isLoaded: true,
+            });
+            setRedirect(true);
+          } else throw new Error(res.message);
         })
         .catch((err) => {
+          console.log(err);
           toolTip("signup", "inputID", "formID", err);
         });
     } catch (err) {
@@ -57,7 +62,7 @@ function SignUp() {
     }
   };
 
-  if (redirect) return <Redirect to="/sign-in" />;
+  if (redirect) return <Redirect to="/" />;
 
   return (
     <Form
@@ -73,12 +78,11 @@ function SignUp() {
       secondInputRef={secondInputRef}
       secondInputValue={password}
       buttonType="submit"
-      formTitle="Sign Up"
+      formTitle="Sign In"
       handleChange={handleChange}
       handleSubmit={handleSubmit}
-      onBlobInputChange={handleChange}
     />
   );
 }
 
-export default SignUp;
+export default SignIn;
