@@ -2,7 +2,7 @@ import React, { useState, useContext, useRef, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { AuthContext } from "../../../contexts/auth/authContext";
 import toolTip from "../../UI/ToolTip/ToolTip";
-import { BaseUrl } from "../../../App";
+import { BaseUrl, socket } from "../../../App";
 import Form from "../../UI/Form/Form";
 
 function SignIn() {
@@ -15,6 +15,9 @@ function SignIn() {
 
   useEffect(() => {
     firstInputRef.current.focus();
+    socket.on("sign-in", (data) => {
+      console.log("dta from server", data);
+    });
   }, []);
 
   const handleChange = (event) => {
@@ -42,14 +45,17 @@ function SignIn() {
           return res.json();
         })
         .then((res) => {
-          console.log(res);
           if (res.status === "success") {
             dispath({
               jwt: res.jwt,
               authenicated: true,
-              userId: res.userId,
+              userId: res.id_uid,
               isLoaded: true,
+              userImage: res.person_image,
+              userName: res.person_name,
             });
+
+            socket.emit("sign-in", `${res.id_uid}`);
             setRedirect(true);
           } else throw new Error(res.message);
         })
@@ -62,7 +68,7 @@ function SignIn() {
     }
   };
 
-  if (redirect) return <Redirect to="/" />;
+  if (redirect) return <Redirect to="/messages" />;
 
   return (
     <Form
