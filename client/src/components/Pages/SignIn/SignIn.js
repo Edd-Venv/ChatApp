@@ -47,8 +47,9 @@ function SignIn() {
         .then((res) => {
           if (res.status === "success") {
             dispath({
+              type: "AUTH",
               jwt: res.jwt,
-              authenicated: true,
+              authenticated: true,
               userId: res.id_uid,
               isLoaded: true,
               userImage: res.person_image,
@@ -68,7 +69,7 @@ function SignIn() {
     }
   };
 
-  if (redirect) return <Redirect to="/messages" />;
+  if (redirect) return <Redirect to="/contacts" />;
 
   return (
     <Form
