@@ -1,10 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
+import PropTypes from "proptypes";
 import toolTip from "../../UI/ToolTip/ToolTip";
 import { BaseUrl } from "../../../App";
 import Form from "../../UI/Form/Form";
 
-function SignUp() {
+function SignUp(props) {
   const firstInputRef = useRef();
   const secondInputRef = useRef();
   const [name, setName] = useState("");
@@ -31,10 +32,12 @@ function SignUp() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const { token } = props.match.params;
     const formData = new FormData();
     formData.append("person_name", name);
     formData.append("password", password);
-
+    if (token !== "none") formData.append("token", token);
     if (file) formData.append("photo", file);
 
     try {
@@ -80,5 +83,10 @@ function SignUp() {
     />
   );
 }
+
+SignUp.propTypes = {
+  match: PropTypes.object,
+  params: PropTypes.object,
+};
 
 export default SignUp;
