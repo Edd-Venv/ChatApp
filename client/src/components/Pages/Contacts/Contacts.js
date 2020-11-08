@@ -1,22 +1,43 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import Contact from "./Contact/Contact";
 import { BaseUrl } from "../../../App";
 import { AuthContext } from "../../../contexts/auth/authContext";
+import Spinner from "../../UI/Spinner/Spinner";
 
 function Contacts() {
   const [state, dispath] = useContext(AuthContext);
-  const [contacts, setContacts] = useState({});
-  console.log("contacts", state);
+  const [contacts, setContacts] = useState([]);
+  const { jwt, userId, userName, authenticated } = state;
 
-  /* fetch(`${BaseUrl}/contacts`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({}),
-  }); */
+  useEffect(() => {
+    fetch(`${BaseUrl}/contacts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
+      body: JSON.stringify({ userId, userName }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.message) console.log("err", result.message);
+        else setContacts(result.contacts);
+      });
+  }, []);
+
+  if (!authenticated) return <Redirect to="/sign-in" />;
+  if (contacts.length === 0) return <p>no contacts, please add contacts</p>;
 
   return (
     <div>
-      <p>Conntacts</p>
+      {contacts.map((contact) => {
+        return (
+          <div key={contact.id_uid}>
+            <Contact contact={contact} />
+          </div>
+        );
+      })}
     </div>
   );
 }
