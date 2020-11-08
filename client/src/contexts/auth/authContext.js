@@ -7,6 +7,7 @@ const initialState = {
   isLoaded: false,
   authenticated: false,
   userId: null,
+  selectedContact: { id_uid: "dummy" },
 };
 export const AuthContext = createContext([]);
 
