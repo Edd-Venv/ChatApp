@@ -1,38 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { socket } from "../../../../App";
+import React from "react";
+import PropTypes from "proptypes";
 
-function MessageForm() {
-  const [state, setState] = useState({ message: "" });
-
-  const handleChange = (event) => {
-    if (event.target.name === "input")
-      setState({ message: event.target.value });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    socket.emit("send-message", state.message);
-  };
-
-  useEffect(() => {
-    socket.on("received-message", (data) => {
-      console.log("socketedCalled");
-      const message = document.createElement("li");
-      message.innerHTML = `${data}`;
-      message.style.color = "#ffff";
-      document.getElementById("ul").appendChild(message);
-    });
-  }, []);
+function MessageForm(props) {
+  const { onChange, onSubmit, value } = props;
 
   return (
     <div style={{ display: "flex" }}>
       <ul id="ul" />
-      <form onSubmit={handleSubmit} autoComplete="off">
-        <input onChange={handleChange} name="input" value={state.message} />
+      <form onSubmit={onSubmit} autoComplete="off">
+        <input onChange={onChange} name="input" value={value} />
         <button type="submit">Send</button>
       </form>
     </div>
   );
 }
+
+MessageForm.propTypes = {
+  onChange: PropTypes.func,
+  onSubmit: PropTypes.func,
+  value: PropTypes.string,
+};
 
 export default MessageForm;
