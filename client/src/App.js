@@ -1,7 +1,7 @@
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable import/no-cycle */
 import "./App.css";
-import React from "react";
+import React, { useEffect } from "react";
 import io from "socket.io-client";
 import { Route } from "react-router-dom";
 import Layout from "./containers/Layout/Layout";
@@ -15,9 +15,15 @@ export const socket = io("https://venv-chat.herokuapp.com");
 export const BaseUrl = "https://venv-chat.herokuapp.com";
 
 function App() {
-  socket.on("connection", () => {
-    // console.log("socket id", socket.id);
-    console.log("app connected");
+  useEffect(() => {
+    socket.on("connect", (data) => {
+      console.log("app connected");
+    });
+
+    socket.on("disconnect", () => {
+      socket.removeAllListeners();
+      socket.disconnect(true);
+    });
   });
 
   return (
