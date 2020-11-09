@@ -3,22 +3,22 @@ import { Redirect } from "react-router-dom";
 import { AuthContext } from "../../../contexts/auth/authContext";
 import { BaseUrl, socket } from "../../../App";
 import MessageForm from "../../UI/Form/MessageForm/MessageForm";
+import messageHandler from "../Utils/Utils";
 
 function Message() {
   const [state, dispath] = useContext(AuthContext);
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([]);
+  const [texts, setTexts] = useState([]);
   const { userId, userName, selectedContact, authenticated, jwt } = state;
 
   const { id_uid, person_image, person_name } = selectedContact;
 
   useEffect(() => {
+    console.log("useEFf Message.js");
+
     socket.on("received-message", (data) => {
-      console.log("socketedCalled");
-      const text = document.createElement("li");
-      text.innerHTML = `${data.message} from ${data.from.userName}`;
-      text.style.color = "#ffff";
-      document.getElementById("ul").appendChild(text);
+      messageHandler(data.message, data.from.userName, "recieved");
+      console.log("socketedCalled", data.from.userName, person_name);
     });
 
     fetch(`${BaseUrl}/messages`, {
@@ -33,12 +33,11 @@ function Message() {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
-        if (result.message) console.log("err", result.message); // setError(true);
-        // else setMessages(result.messages);
+        if (result.message) console.log("err", result.message);
+        else setTexts(result.texts);
       });
   }, []);
-  console.log("Message renderd");
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -48,6 +47,8 @@ function Message() {
       message,
     };
     socket.emit("send-message", data);
+    messageHandler(message, userName, userName);
+    setMessage("");
   };
 
   const handleChange = (event) => {
@@ -58,6 +59,7 @@ function Message() {
 
   return (
     <MessageForm
+      texts={texts}
       onChange={handleChange}
       onSubmit={handleSubmit}
       value={message}
