@@ -11,14 +11,11 @@ function Message() {
   const [texts, setTexts] = useState([]);
   const { userId, userName, selectedContact, authenticated, jwt } = state;
 
-  const { id_uid, person_image, person_name } = selectedContact;
+  const { id_uid } = selectedContact;
 
   useEffect(() => {
-    console.log("useEFf Message.js");
-
     socket.on("received-message", (data) => {
       messageHandler(data.message, data.from.userName, "recieved");
-      console.log("socketedCalled", data.from.userName, person_name);
     });
 
     fetch(`${BaseUrl}/messages`, {
