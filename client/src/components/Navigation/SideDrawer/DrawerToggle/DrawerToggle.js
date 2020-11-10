@@ -6,7 +6,9 @@ import Backdrop from "../../../UI/Backdrop/Backdrop";
 
 function DrawerToggle() {
   const [state, setState] = useState(false);
-  let assignClasses = ["bx bx-menu"].join("");
+  let assignClasses;
+
+  if (!state) assignClasses = ["bx bx-menu"].join("");
   if (state) assignClasses = ["bx bx-menu", "bx-x"].join(" ");
 
   const drawerToggleHandler = () => {

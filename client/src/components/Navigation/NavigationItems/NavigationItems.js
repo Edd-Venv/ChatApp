@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import classes from "./NavigationItems.module.css";
 import NavigationItem from "./NavigationItem/NavigationItem";
 
@@ -8,14 +8,15 @@ function NavigationItems() {
       <nav className={classes.Nav}>
         <div>
           <NavigationItem link="/sign-in">
-            <i className="bx bx-log-in Nav_icon" />
+            <i className={`bx bx-log-in ${classes.Nav_icon}`} />
             <span className={classes.Nav_name}>Sign In</span>
           </NavigationItem>
           <NavigationItem link="/contacts">
-            <i className="bx bxs-contact Nav_icon" />
+            <i className={`bx bxs-contact ${classes.Nav_icon}`} />
             <span className={classes.Nav_name}>Contacts</span>
           </NavigationItem>
           <NavigationItem link="/sign-up/none">
+            <i className={`bx bx-log-in-circle ${classes.Nav_icon}`} />
             <span className={classes.Nav_name}>Sign Up</span>
           </NavigationItem>
         </div>
@@ -25,14 +26,3 @@ function NavigationItems() {
 }
 
 export default NavigationItems;
-
-/* useEffect(() => {
-    const navbar = document.getElementById("nav-bar");
-    const navItem = document.getElementById("nav-item");
-
-    if (navbar && navItem) {
-      navItem.addEventListener("click", () => {
-        navbar.style.left = "-30%";
-      });
-    }
-  }, []); */
