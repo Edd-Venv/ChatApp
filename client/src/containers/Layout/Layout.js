@@ -10,9 +10,7 @@ function Layout(props) {
     <div data-test="component-layout" id="bodypd">
       <Toolbar />
       <AuthContextProvider>
-        <Background>
-          <main>{children}</main>
-        </Background>
+        <main>{children}</main>
       </AuthContextProvider>
     </div>
   );

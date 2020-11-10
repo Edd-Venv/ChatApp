@@ -3,6 +3,8 @@ import { Redirect } from "react-router-dom";
 import Contact from "./Contact/Contact";
 import { BaseUrl } from "../../../App";
 import { AuthContext } from "../../../contexts/auth/authContext";
+import BackGroundClasses from "../../UI/Background/Background.module.css";
+import classes from "./Contacts.module.css";
 import Spinner from "../../UI/Spinner/Spinner";
 
 function Contacts() {
@@ -30,15 +32,18 @@ function Contacts() {
   if (contacts.length === 0) return <p>no contacts, please add contacts</p>;
 
   return (
-    <div>
-      {contacts.map((contact) => {
-        return (
-          <div key={contact.id_uid}>
-            <Contact contact={contact} />
-          </div>
-        );
-      })}
-    </div>
+    <>
+      <div className={BackGroundClasses.BackGroundImg} />
+      <div className={classes.Container}>
+        {contacts.map((contact) => {
+          return (
+            <div key={contact.id_uid}>
+              <Contact contact={contact} />
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 }
 

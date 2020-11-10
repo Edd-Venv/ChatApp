@@ -3,16 +3,60 @@
   flex-direction: column;
   padding-inline-start: 0px;
   list-style-type: none;
+  padding-bottom: 50px;
 }
+
 .Container {
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  max-width: 90vw;
 }
+
 .Form {
   display: flex;
+  position: fixed;
+  bottom: 16px;
+  z-index: 50;
+  max-width: 90vw;
+  border-radius: 14px;
+  border: 7px solid #02122d;
 }
 
 .Input {
   width: 100vw;
+  border: none;
+  outline: none;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  letter-spacing: 0.07rem;
+  font-size: 0.9rem;
+}
+.SendBottom {
+  border: none;
+  display: flex;
+  align-items: center;
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+  padding: 0.5rem;
+  color: #4723d9;
+  background-color: #f7f6fb;
+}
+
+@media (min-width: 700px) {
+  .Container {
+    max-width: 70vw;
+  }
+  .Form {
+    max-width: 70vw;
+  }
+}
+
+@media (min-width: 1000px) {
+  .Container {
+    max-width: 50vw;
+    margin: 0 auto;
+  }
+  .Form {
+    max-width: 50vw;
+  }
 }

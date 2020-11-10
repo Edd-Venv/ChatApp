@@ -5,6 +5,7 @@ import classes from "./NavigationItem.module.css";
 import navItemsClasses from "../NavigationItems.module.css";
 import drawerToggleClasses from "../../SideDrawer/DrawerToggle/DrawerToggle.module.css";
 import backdropClasses from "../../../UI/Backdrop/Backdrop.module.css";
+import { socket } from "../../../../App";
 
 function NavigationItem(props) {
   const { link, children } = props;
@@ -22,6 +23,7 @@ function NavigationItem(props) {
       header.classList.toggle(drawerToggleClasses.Body_pd);
       backdrop.classList.toggle(backdropClasses.Show);
     }
+    socket.removeAllListeners();
   };
   return (
     <li className={classes.Nav_logo}>

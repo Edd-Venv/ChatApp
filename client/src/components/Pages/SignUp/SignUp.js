@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import PropTypes from "proptypes";
+import BackGround from "../../UI/Background/Background";
 import toolTip from "../../UI/ToolTip/ToolTip";
 import { BaseUrl } from "../../../App";
 import Form from "../../UI/Form/Form";
@@ -63,24 +64,26 @@ function SignUp(props) {
   if (redirect) return <Redirect to="/sign-in" />;
 
   return (
-    <Form
-      firstInputOnKeyDown={onfirstInputKeyDown}
-      firstInputValue={name}
-      firstInputType="text"
-      firstInputLabel="name"
-      firstInputPlaceHolder="User Name"
-      firstInputRef={firstInputRef}
-      secondInputPlaceHolder="Password"
-      secondInputType="password"
-      secondInputLabel="password"
-      secondInputRef={secondInputRef}
-      secondInputValue={password}
-      buttonType="submit"
-      formTitle="Sign Up"
-      handleChange={handleChange}
-      handleSubmit={handleSubmit}
-      onBlobInputChange={handleChange}
-    />
+    <BackGround>
+      <Form
+        firstInputOnKeyDown={onfirstInputKeyDown}
+        firstInputValue={name}
+        firstInputType="text"
+        firstInputLabel="name"
+        firstInputPlaceHolder="User Name"
+        firstInputRef={firstInputRef}
+        secondInputPlaceHolder="Password"
+        secondInputType="password"
+        secondInputLabel="password"
+        secondInputRef={secondInputRef}
+        secondInputValue={password}
+        buttonType="submit"
+        formTitle="Sign Up"
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        onBlobInputChange={handleChange}
+      />
+    </BackGround>
   );
 }
 

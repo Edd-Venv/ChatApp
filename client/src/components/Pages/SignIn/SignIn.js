@@ -1,5 +1,6 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
 import { Redirect } from "react-router-dom";
+import BackGround from "../../UI/Background/Background";
 import { AuthContext } from "../../../contexts/auth/authContext";
 import toolTip from "../../UI/ToolTip/ToolTip";
 import { BaseUrl, socket } from "../../../App";
@@ -72,23 +73,25 @@ function SignIn() {
   if (redirect) return <Redirect to="/contacts" />;
 
   return (
-    <Form
-      firstInputOnKeyDown={onfirstInputKeyDown}
-      firstInputValue={name}
-      firstInputType="text"
-      firstInputLabel="name"
-      firstInputPlaceHolder="User Name"
-      firstInputRef={firstInputRef}
-      secondInputPlaceHolder="Password"
-      secondInputType="password"
-      secondInputLabel="password"
-      secondInputRef={secondInputRef}
-      secondInputValue={password}
-      buttonType="submit"
-      formTitle="Sign In"
-      handleChange={handleChange}
-      handleSubmit={handleSubmit}
-    />
+    <BackGround>
+      <Form
+        firstInputOnKeyDown={onfirstInputKeyDown}
+        firstInputValue={name}
+        firstInputType="text"
+        firstInputLabel="name"
+        firstInputPlaceHolder="User Name"
+        firstInputRef={firstInputRef}
+        secondInputPlaceHolder="Password"
+        secondInputType="password"
+        secondInputLabel="password"
+        secondInputRef={secondInputRef}
+        secondInputValue={password}
+        buttonType="submit"
+        formTitle="Sign In"
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
+    </BackGround>
   );
 }
 
