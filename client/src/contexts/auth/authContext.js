@@ -23,16 +23,16 @@ export const AuthContextProvider = ({ children }) => {
         return result.json();
       })
       .then((response) => {
-        localStorage.setItem("jwt", response.jwt);
-        localStorage.setItem("userId", response.userId);
+        if (response.message === "Cannot read property 'split' of undefined") {
+          localStorage.setItem("userImage", "default.jpg");
 
-        dispatch({
-          type: "AUTH",
-          isLoaded: true,
-          authenticated: response.authenticated,
-          jwt: response.jwt,
-          userId: response.userId,
-        });
+          dispatch({
+            type: "AUTH",
+            isLoaded: true,
+            authenticated: false,
+            userImage: "default.jpg",
+          });
+        } else console.log(response);
       });
   }, []);
 
@@ -45,3 +45,11 @@ export const AuthContextProvider = ({ children }) => {
 AuthContextProvider.propTypes = {
   children: PropTypes.object,
 };
+
+/*  localStorage.setItem("jwt", null);
+        localStorage.setItem("userId", response.userId);
+          jwt: response.jwt,
+          userId: response.userId,
+          userImage: response.person_image,
+          userName: response.person_name,
+        */

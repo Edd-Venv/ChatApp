@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import classes from "./DrawerToggle.module.css";
 import navItemsClasses from "../../NavigationItems/NavigationItems.module.css";
 import backDropClasses from "../../../UI/Backdrop/Backdrop.module.css";
+import Logo from "../../../UI/Logo/Logo";
 import Backdrop from "../../../UI/Backdrop/Backdrop";
 
 function DrawerToggle() {
@@ -40,3 +41,10 @@ function DrawerToggle() {
 }
 
 export default DrawerToggle;
+
+/*
+
+<div className={classes.Header_img}>
+          <Logo />
+        </div>
+ */

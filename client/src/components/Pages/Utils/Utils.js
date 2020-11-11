@@ -1,19 +1,19 @@
 import classes from "./Utils.module.css";
 
-function getDate() {
+export function getDate() {
   const d = new Date();
   const hour = d.getHours();
   const mins = d.getMinutes();
   return `${hour}:${mins}`;
 }
 
-function messageHandler(message, userName, selectedContactsName) {
+function messageHandler(message, userName, selectedContactsName, timeStamp) {
   const text = document.createElement("li");
   const p = document.createElement("p");
   const small = document.createElement("small");
 
   p.innerText = message;
-  small.innerText = getDate();
+  small.innerText = timeStamp;
   small.className = classes.Small;
   p.appendChild(small);
 

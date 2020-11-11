@@ -29,7 +29,12 @@ function Contacts() {
   }, []);
 
   if (!authenticated) return <Redirect to="/sign-in" />;
-  if (contacts.length === 0) return <p>no contacts, please add contacts</p>;
+
+  if (!contacts) return <p>no contacts, please add contacts</p>;
+
+  if (contacts) {
+    if (contacts.length === 0) return <p>no contacts, please add contacts</p>;
+  }
 
   return (
     <>

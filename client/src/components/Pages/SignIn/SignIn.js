@@ -47,6 +47,10 @@ function SignIn() {
         })
         .then((res) => {
           if (res.status === "success") {
+            localStorage.setItem("jwt", res.jwt);
+            localStorage.setItem("userImage", res.person_image);
+            localStorage.setItem("userId", res.id_uid);
+
             dispath({
               type: "AUTH",
               jwt: res.jwt,
@@ -70,7 +74,7 @@ function SignIn() {
     }
   };
 
-  if (redirect) return <Redirect to="/contacts" />;
+  if (redirect) return <Redirect to="/" />;
 
   return (
     <BackGround>

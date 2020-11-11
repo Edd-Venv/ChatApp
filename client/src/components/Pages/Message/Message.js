@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import { AuthContext } from "../../../contexts/auth/authContext";
 import { BaseUrl, socket } from "../../../App";
 import MessageForm from "../../UI/Form/MessageForm/MessageForm";
-import messageHandler from "../Utils/Utils";
+import messageHandler, { getDate } from "../Utils/Utils";
 
 function Message() {
   const [state, dispath] = useContext(AuthContext);
@@ -15,7 +15,12 @@ function Message() {
 
   useEffect(() => {
     socket.on("received-message", (data) => {
-      messageHandler(data.message, data.from.userName, "recieved");
+      messageHandler(
+        data.message,
+        data.from.userName,
+        "recieved",
+        data.timeStamp
+      );
     });
 
     fetch(`${BaseUrl}/messages`, {
@@ -37,11 +42,12 @@ function Message() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    const timeStamp = getDate();
     const data = {
       to: id_uid,
       from: { userId, userName },
       message,
+      timeStamp,
     };
     socket.emit("send-message", data);
     messageHandler(message, userName, userName);
