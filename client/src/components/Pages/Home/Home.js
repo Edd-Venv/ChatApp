@@ -7,7 +7,7 @@ function Home() {
       <div>
         <p>
           add your friends{" "}
-          {`${BaseUrl}/sign-up/${localStorage.getItem("userId")}`}
+          {`http://localhost:3000/sign-up/${localStorage.getItem("userId")}`}
         </p>
       </div>
     );
