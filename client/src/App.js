@@ -11,6 +11,7 @@ import Message from "./components/Pages/Message/Message";
 import SignIn from "./components/Pages/SignIn/SignIn";
 import Contacts from "./components/Pages/Contacts/Contacts";
 import Home from "./components/Pages/Home/Home";
+import SignOut from "./components/Pages/Utils/Utils";
 
 export const socket = io("https://venv-chat.herokuapp.com");
 export const BaseUrl = "https://venv-chat.herokuapp.com";
