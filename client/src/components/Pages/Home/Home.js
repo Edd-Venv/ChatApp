@@ -1,14 +1,13 @@
-import React from "react";
-import { BaseUrl } from "../../../App";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../contexts/auth/authContext";
 
 function Home() {
-  if (localStorage.getItem("userId"))
+  const [state, dispatch] = useContext(AuthContext);
+  const { userId, authenticated } = state;
+  if (authenticated)
     return (
       <div>
-        <p>
-          add your friends{" "}
-          {`http://localhost:3000/sign-up/${localStorage.getItem("userId")}`}
-        </p>
+        <p>add your friends {`http://localhost:3000/sign-up/${userId}`}</p>
       </div>
     );
   return <p>Sign In or Sign Up</p>;

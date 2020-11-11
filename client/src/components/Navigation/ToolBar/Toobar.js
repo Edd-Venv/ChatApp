@@ -2,7 +2,6 @@ import React from "react";
 import classes from "./Toolbar.module.css";
 import DrawerToggle from "../SideDrawer/DrawerToggle/DrawerToggle";
 import NavigationItems from "../NavigationItems/NavigationItems";
-import Logo from "../../UI/Logo/Logo";
 
 function Toolbar() {
   return (

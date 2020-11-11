@@ -15,7 +15,6 @@ function Message() {
 
   useEffect(() => {
     socket.on("received-message", (data) => {
-      console.log(data);
       messageHandler(
         data.message,
         data.from.userName,

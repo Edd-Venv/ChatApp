@@ -35,6 +35,9 @@ function DrawerToggle() {
         <div className={classes.Header_toggle} onClick={drawerToggleHandler}>
           <i className={assignClasses} id="drawer-toggle" />
         </div>
+        <div className={classes.Header_img}>
+          <Logo />
+        </div>
       </header>
     </>
   );
