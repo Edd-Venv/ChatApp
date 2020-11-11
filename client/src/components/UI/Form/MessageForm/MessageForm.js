@@ -28,7 +28,7 @@ function MessageForm(props) {
           );
       }
     }
-  }, []);
+  }, [texts]);
 
   return (
     <>
