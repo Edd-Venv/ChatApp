@@ -6,24 +6,27 @@ import messageHandler from "../../../Pages/Utils/Utils";
 
 function MessageForm(props) {
   const { onChange, onSubmit, value, texts } = props;
-  console.log("messageForm", texts);
-  // messageHandler()
+
   useEffect(() => {
     if (texts.length > 0) {
-      /* for (let i = 0; i < texts.length; i++) {
+      const userId = localStorage.getItem("userId");
 
-        for (let j = 0; j < texts[0].texts.length; j++) {
-          // console.log(texts[0].texts[j].message);
-          // console.log("messages", texts[0].texts[j].message);
-          messageHandler(texts[0].texts[j].message, "test", "test");
-        }
-
-        for (let k = 0; k < texts[1].texts.length; k++) {
-          // console.log("messages", texts[0].texts[k].message);
-          messageHandler(texts[1].texts[k].message, "test", "recieved");
-        }
-
-      } */
+      for (let j = 0; j < texts[0].texts.length; j++) {
+        if (texts[0].texts[j].userId === userId)
+          messageHandler(
+            texts[0].texts[j].message,
+            "test",
+            "test",
+            texts[0].texts[j].timeStamp
+          );
+        else
+          messageHandler(
+            texts[0].texts[j].message,
+            "test",
+            "recieved",
+            texts[0].texts[j].timeStamp
+          );
+      }
     }
   }, []);
 

@@ -15,6 +15,7 @@ function Message() {
 
   useEffect(() => {
     socket.on("received-message", (data) => {
+      console.log(data);
       messageHandler(
         data.message,
         data.from.userName,
@@ -50,7 +51,7 @@ function Message() {
       timeStamp,
     };
     socket.emit("send-message", data);
-    messageHandler(message, userName, userName);
+    messageHandler(message, userName, userName, timeStamp);
     setMessage("");
   };
 
