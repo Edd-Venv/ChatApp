@@ -10,6 +10,7 @@ import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 import Message from "./components/Pages/Message/Message";
 import SignIn from "./components/Pages/SignIn/SignIn";
 import Contacts from "./components/Pages/Contacts/Contacts";
+import Home from "./components/Pages/Home/Home";
 
 export const socket = io("https://venv-chat.herokuapp.com");
 export const BaseUrl = "https://venv-chat.herokuapp.com";
@@ -29,6 +30,7 @@ function App() {
   return (
     <ErrorBoundary>
       <Layout>
+        <Route path="/" exact component={Home} />
         <Route path="/sign-in" exact component={SignIn} />
         <Route path="/messages" exact component={Message} />
         <Route path="/sign-up/:token" exact component={SignUp} />
