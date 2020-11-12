@@ -10,7 +10,7 @@ function SignIn() {
   const firstInputRef = useRef();
   const secondInputRef = useRef();
   const [name, setName] = useState("");
-  const [, dispath] = useContext(AuthContext);
+  const [state, dispath] = useContext(AuthContext);
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
 
@@ -50,16 +50,15 @@ function SignIn() {
             localStorage.setItem("jwt", res.jwt);
             localStorage.setItem("userImage", res.person_image);
             localStorage.setItem("userId", res.id_uid);
-
-            dispath({
-              type: "AUTH",
-              jwt: res.jwt,
-              authenticated: true,
-              userId: res.id_uid,
-              isLoaded: true,
-              userImage: res.person_image,
-              userName: res.person_name,
-            });
+            const newState = Object.assign({}, state);
+            newState.type = "AUTH";
+            newState.jwt = res.jwt;
+            newState.authenticated = true;
+            newState.userId = res.id_uid;
+            newState.isLoaded = true;
+            newState.userImage = res.person_image;
+            newState.userName = res.person_name;
+            dispath(newState);
 
             socket.emit("sign-in", `${res.id_uid}`);
             setRedirect(true);
