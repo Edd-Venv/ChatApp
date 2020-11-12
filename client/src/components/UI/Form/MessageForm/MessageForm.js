@@ -30,12 +30,20 @@ function MessageForm(props) {
     }
   }, [texts]);
 
+  if (texts.length === 0) {
+    const p = document.createElement("p");
+    p.className = classes.NoMessages;
+    p.innerHTML = "no messages";
+    if (document.getElementById("ul")) {
+      document.getElementById("ul").innerHTML = p.innerHTML;
+    }
+  }
+
   return (
     <>
-      <div className={BackGroundClasses.BackGroundImg} />
       <div className={classes.Container}>
         <ul id="ul" className={classes.UL} />
-
+        <div className={BackGroundClasses.BackGroundImg} />
         <form onSubmit={onSubmit} autoComplete="off" className={classes.Form}>
           <input
             onChange={onChange}
@@ -44,7 +52,7 @@ function MessageForm(props) {
             className={classes.Input}
             placeholder="Type a message"
           />
-          <button className={classes.SendBottom} type="submit">
+          <button className={classes.SendButton} type="submit">
             <i className="bx bx-send" />
           </button>
         </form>
