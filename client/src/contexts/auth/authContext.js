@@ -36,7 +36,6 @@ export const AuthContextProvider = ({ children }) => {
             newState.authenticated = false;
             newState.isLoaded = true;
             newState.type = "AUTH";
-
             dispatch(newState);
           } else {
             const newState = Object.assign({}, state);
@@ -57,11 +56,3 @@ export const AuthContextProvider = ({ children }) => {
 AuthContextProvider.propTypes = {
   children: PropTypes.array,
 };
-
-/*  localStorage.setItem("jwt", null);
-        localStorage.setItem("userId", response.userId);
-          jwt: response.jwt,
-          userId: response.userId,
-          userImage: response.person_image,
-          userName: response.person_name,
-        */

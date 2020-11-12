@@ -47,10 +47,18 @@ function NavigationItems() {
             <span className={classes.Nav_name}>Home</span>
           </NavigationItem>
           {signIn}
-          <NavigationItem link="/contacts">
-            <i className={`bx bxs-contact ${classes.Nav_icon}`} />
-            <span className={classes.Nav_name}>Contacts</span>
-          </NavigationItem>
+          <span className={classes.MobileOnly}>
+            <NavigationItem link="/contacts">
+              <i className={`bx bxs-contact ${classes.Nav_icon}`} />
+              <span className={classes.Nav_name}>Contacts</span>
+            </NavigationItem>
+          </span>
+          <span className={classes.DesktopOnly}>
+            <NavigationItem link="/messages">
+              <i className={`bx bx-message-detail  ${classes.Nav_icon}`} />
+              <span className={classes.Nav_name}>Messages</span>
+            </NavigationItem>
+          </span>
           {signUp}
           {signOut}
         </div>
