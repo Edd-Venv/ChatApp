@@ -1,5 +1,6 @@
 const AUTH = "AUTH";
 const SELECTEDCONTACT = "SELECTEDCONTACT";
+const RESETSELECTEDCONTACT = "RESETSELECTEDCONTACT";
 const LOGOUT = "LOGOUT";
 
 const authReducer = (state, action) => {
@@ -22,6 +23,13 @@ const authReducer = (state, action) => {
         id_uid,
         person_name,
         person_image,
+      };
+      return newState;
+    }
+    case RESETSELECTEDCONTACT: {
+      const newState = Object.assign({}, state);
+      newState.selectedContact = {
+        id_uid: "dummy",
       };
       return newState;
     }

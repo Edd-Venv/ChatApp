@@ -7,7 +7,7 @@ export function getDate() {
   return `${hour}:${mins}`;
 }
 
-function messageHandler(message, userName, selectedContactsName, timeStamp) {
+function messageHandler(message, userName, status, timeStamp) {
   const text = document.createElement("li");
   const p = document.createElement("p");
   const small = document.createElement("small");
@@ -19,8 +19,8 @@ function messageHandler(message, userName, selectedContactsName, timeStamp) {
 
   text.innerHTML = `${p.innerHTML}`;
 
-  if (selectedContactsName === "recieved") text.className = classes.LeftTextBox;
-  else text.className = classes.RightTextBox;
+  if (status === "recieved") text.className = classes.LeftTextBox;
+  if (status === "sent") text.className = classes.RightTextBox;
 
   document
     .getElementById("ul")

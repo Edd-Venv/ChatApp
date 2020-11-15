@@ -13,8 +13,8 @@ import Contacts from "./components/Pages/Contacts/Contacts";
 import Home from "./components/Pages/Home/Home";
 import SignOut from "./components/Pages/Utils/Utils";
 
-export const socket = io("https://venv-chat.herokuapp.com");
-export const BaseUrl = "https://venv-chat.herokuapp.com";
+export const socket = io("https://awschatapp.herokuapp.com");
+export const BaseUrl = "https://awschatapp.herokuapp.com";
 
 function App() {
   useEffect(() => {
@@ -24,7 +24,7 @@ function App() {
 
     socket.on("disconnect", () => {
       socket.removeAllListeners();
-      socket.disconnect(true);
+      // socket.disconnect(true);
     });
   });
 

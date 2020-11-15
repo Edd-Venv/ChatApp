@@ -16,7 +16,7 @@ function MessageForm(props) {
           messageHandler(
             texts[0].texts[j].message,
             "test",
-            "test",
+            "sent",
             texts[0].texts[j].timeStamp
           );
         else
@@ -30,7 +30,7 @@ function MessageForm(props) {
     }
   }, [texts]);
 
-  if (texts.length === 0) {
+  /* if (texts.length === 0) {
     const p = document.createElement("p");
     p.className = classes.NoMessages;
     p.innerHTML = "no messages";
@@ -38,7 +38,7 @@ function MessageForm(props) {
       document.getElementById("ul").innerHTML = p.innerHTML;
     }
   }
-
+*/
   return (
     <>
       <div className={classes.Container}>
@@ -65,7 +65,7 @@ MessageForm.propTypes = {
   onChange: PropTypes.func,
   onSubmit: PropTypes.func,
   value: PropTypes.string,
-  texts: PropTypes.array,
+  texts: PropTypes.any,
 };
 
 export default MessageForm;

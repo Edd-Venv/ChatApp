@@ -11,7 +11,7 @@ function SignOut() {
     const oldState = Object.assign({}, initialState);
     oldState.type = "LOGOUT";
     dispatch(oldState);
-    socket.disconnect();
+    socket.disconnect(true);
     return true;
   });
 

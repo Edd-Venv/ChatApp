@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useMemo } from "react";
 import { Redirect } from "react-router-dom";
 import { AuthContext } from "../../../contexts/auth/authContext";
 import { BaseUrl, socket } from "../../../App";
@@ -12,16 +12,22 @@ function Message() {
   const [message, setMessage] = useState("");
   const [texts, setTexts] = useState([]);
   const { userId, userName, selectedContact, authenticated, jwt } = state;
-  const { id_uid } = selectedContact;
+  const id_uid = useMemo(() => selectedContact.id_uid, [selectedContact]);
 
   useEffect(() => {
+    console.log("rednder");
     socket.on("received-message", (data) => {
+      console.log("recd", data);
       messageHandler(
         data.message,
         data.from.userName,
         "recieved",
         data.timeStamp
       );
+    });
+    socket.on("sent-message", (data) => {
+      console.log("sebt", data);
+      messageHandler(data.message, data.from.userName, "sent", data.timeStamp);
     });
 
     if (id_uid !== "dummy")
@@ -52,7 +58,6 @@ function Message() {
       timeStamp,
     };
     socket.emit("send-message", data);
-    messageHandler(message, userName, userName, timeStamp);
     setMessage("");
   };
 

@@ -11,7 +11,9 @@ if (!localStorage.getItem("userImage") || !localStorage.getItem("username")) {
 
 const app = (
   <BrowserRouter>
-    <App />
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
   </BrowserRouter>
 );
 

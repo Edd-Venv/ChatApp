@@ -51,7 +51,12 @@ function Contacts() {
   return (
     <>
       <div className={classes.Container}>
-        <h2 className={contactClasses.ContactBox}>Contacts</h2>
+        <h2
+          className={contactClasses.ContactBox}
+          style={{ height: "fit-content" }}
+        >
+          Contacts
+        </h2>
         {contacts.map((contact) => {
           return (
             <div key={contact.id_uid}>

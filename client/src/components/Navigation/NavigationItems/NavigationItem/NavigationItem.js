@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import PropTypes from "proptypes";
 import classes from "./NavigationItem.module.css";
 import navItemsClasses from "../NavigationItems.module.css";
 import drawerToggleClasses from "../../SideDrawer/DrawerToggle/DrawerToggle.module.css";
 import backdropClasses from "../../../UI/Backdrop/Backdrop.module.css";
+import { AuthContext } from "../../../../contexts/auth/authContext";
 import { socket } from "../../../../App";
 
 function NavigationItem(props) {
+  const [, dispatch] = useContext(AuthContext);
   const { link, children } = props;
   const navItemHandler = () => {
     const nav = document.getElementById("nav-bar");
@@ -23,6 +25,7 @@ function NavigationItem(props) {
       header.classList.toggle(drawerToggleClasses.Body_pd);
       backdrop.classList.toggle(backdropClasses.Show);
     }
+    dispatch({ type: "RESETSELECTEDCONTACT" });
     socket.removeAllListeners();
   };
   return (
