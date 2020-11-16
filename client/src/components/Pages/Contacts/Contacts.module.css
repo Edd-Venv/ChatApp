@@ -8,3 +8,9 @@
   right: 0;
   position: fixed;
 }
+
+.NoContacts {
+  position: absolute;
+  color: aliceblue;
+  z-index: 10;
+}

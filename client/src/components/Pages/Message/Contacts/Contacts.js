@@ -42,10 +42,16 @@ function Contacts() {
       ).className = contactClasses.ContactBox;
   };
 
-  if (!contacts) return <p>no contacts, please add contacts</p>;
+  const noContacts = (
+    <>
+      <h2 className={classes.NoContacts}>Please add contacts.</h2>
+    </>
+  );
+
+  if (!contacts) return noContacts;
 
   if (contacts) {
-    if (contacts.length === 0) return <p>no contacts, please add contacts</p>;
+    if (contacts.length === 0) return noContacts;
   }
 
   return (
