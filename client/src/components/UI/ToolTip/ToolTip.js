@@ -1,6 +1,6 @@
 import classes from "./ToolTip.module.css";
 
-const handleToolTip = (tooltipId, inputId, formId, errorMassage) => {
+const handleToolTip = (tooltipId, inputId, formId, message) => {
   if (!document.getElementById(tooltipId)) {
     const toolTip = document.createElement("p");
     toolTip.id = tooltipId;
@@ -18,7 +18,7 @@ const handleToolTip = (tooltipId, inputId, formId, errorMassage) => {
       toolTip.className = classes.ToolTip;
       toolTip.style.left = `${x}px`;
       toolTip.style.top = `${y}px`;
-      toolTip.innerHTML = errorMassage;
+      toolTip.innerHTML = message;
     }
   }
 };
