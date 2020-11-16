@@ -1,0 +1,15 @@
+.Container {
+  display: flex;
+  flex-direction: row;
+}
+
+.ContactsContainer {
+  display: block;
+}
+
+@media (max-width: 700px) {
+  .Container {
+    display: block;
+    flex-direction: none;
+  }
+}

@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
+import { AuthContextProvider } from "./contexts/auth/authContext";
+import { SocketContextProvider } from "./contexts/socket/socketContext";
 
 if (!localStorage.getItem("userImage") || !localStorage.getItem("username")) {
   localStorage.setItem("userImage", "default.jpg");
@@ -11,7 +13,11 @@ if (!localStorage.getItem("userImage") || !localStorage.getItem("username")) {
 
 const app = (
   <BrowserRouter>
-    <App />
+    <AuthContextProvider>
+      <SocketContextProvider>
+        <App />
+      </SocketContextProvider>
+    </AuthContextProvider>
   </BrowserRouter>
 );
 

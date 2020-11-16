@@ -1,30 +1,29 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import PropTypes from "proptypes";
 import BackGround from "../../UI/Background/Background";
+import { AuthContext } from "../../../contexts/auth/authContext";
 import toolTip from "../../UI/ToolTip/ToolTip";
-import { BaseUrl } from "../../../App";
+import { BaseUrl, socket } from "../../../App";
 import Form from "../../UI/Form/Form";
 
-function SignUp(props) {
+function SignIn() {
   const firstInputRef = useRef();
   const secondInputRef = useRef();
   const [name, setName] = useState("");
-  const [file, setFile] = useState(null);
+  const [state, dispath] = useContext(AuthContext);
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
     firstInputRef.current.focus();
+    socket.on("sign-in", (data) => {
+      console.log("dta from server", data);
+    });
   }, []);
 
   const handleChange = (event) => {
     if (event.target.name === "name") setName(event.target.value.toUpperCase());
     else if (event.target.name === "password") setPassword(event.target.value);
-    else {
-      const blob = new Blob([event.target.files[0]], { type: "image/jpeg" });
-      setFile(blob);
-    }
   };
 
   const onfirstInputKeyDown = (event) => {
@@ -34,26 +33,39 @@ function SignUp(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const { token } = props.match.params;
-    const formData = new FormData();
-    formData.append("person_name", name);
-    formData.append("password", password);
-    if (token !== "none") formData.append("token", token);
-    if (file) formData.append("photo", file);
-
     try {
-      fetch(`${BaseUrl}/sign-up`, {
+      fetch(`${BaseUrl}/sign-in`, {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          person_name: name,
+          password,
+        }),
       })
         .then((res) => {
           return res.json();
         })
         .then((res) => {
-          if (res.status === "success") setRedirect(true);
-          else throw new Error(res.message);
+          if (res.status === "success") {
+            localStorage.setItem("jwt", res.jwt);
+            localStorage.setItem("userImage", res.person_image);
+            localStorage.setItem("userId", res.id_uid);
+            const newState = Object.assign({}, state);
+            newState.type = "AUTH";
+            newState.jwt = res.jwt;
+            newState.authenticated = true;
+            newState.userId = res.id_uid;
+            newState.isLoaded = true;
+            newState.userImage = res.person_image;
+            newState.userName = res.person_name;
+            dispath(newState);
+
+            socket.emit("sign-in", `${res.id_uid}`);
+            setRedirect(true);
+          } else throw new Error(res.message);
         })
         .catch((err) => {
+          console.log(err);
           toolTip("signup", "inputID", "formID", err);
         });
     } catch (err) {
@@ -61,7 +73,7 @@ function SignUp(props) {
     }
   };
 
-  if (redirect) return <Redirect to="/sign-in" />;
+  if (redirect) return <Redirect to="/" />;
 
   return (
     <BackGround>
@@ -78,18 +90,12 @@ function SignUp(props) {
         secondInputRef={secondInputRef}
         secondInputValue={password}
         buttonType="submit"
-        formTitle="Sign Up"
+        formTitle="Sign In"
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        onBlobInputChange={handleChange}
       />
     </BackGround>
   );
 }
 
-SignUp.propTypes = {
-  match: PropTypes.object,
-  params: PropTypes.object,
-};
-
-export default SignUp;
+export default SignIn;

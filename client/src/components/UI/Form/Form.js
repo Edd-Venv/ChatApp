@@ -25,9 +25,9 @@ const form = (props) => {
     signInOptions = (
       <div>
         <span className={classes.Login_account}>
-          Don`&apos;`t have an account?
+          Don&apos;t have an account?
         </span>
-        <Link className={classes.Login_signin} to="/signup">
+        <Link className={classes.Login_signin} to="/sign-up/none">
           Sign Up
         </Link>
       </div>
@@ -58,7 +58,7 @@ const form = (props) => {
       <div>
         {" "}
         <span className={classes.Login_account}>Already have an account?</span>
-        <Link className={classes.Login_signup} to="/signin">
+        <Link className={classes.Login_signup} to="/sign-in">
           Sign In
         </Link>
       </div>

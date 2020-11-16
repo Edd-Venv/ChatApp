@@ -3,7 +3,7 @@ const aws = require("aws-sdk");
 const sharp = require("sharp");
 const { hash, compare } = require("bcryptjs");
 const uuid_generate = require("uuid");
-const pool = require("../../database/db");
+const client = require("../../database/db");
 
 aws.config = new aws.Config();
 aws.config.accessKeyId = "AKIAWQYC7JAF2DDUN2DM";
@@ -16,7 +16,7 @@ exports.signUp = async (req) => {
   const { person_name, password } = req.body;
 
   // 1. Check if the user exist
-  const checkDB = await pool.query(
+  const checkDB = await client.query(
     `SELECT person_name FROM person WHERE person_name = '${person_name}'`
   );
   console.log("DB", checkDB);
@@ -51,7 +51,7 @@ exports.signUp = async (req) => {
           .then(async (resp) => {
             console.log("put pic on s3");
             //Insert the user in database
-            await pool.query(
+            await client.query(
               "INSERT INTO person (id_uid, person_name, password, person_image) VALUES($1, $2, $3, $4)",
               [
                 uuid_generate.v4(),
@@ -67,7 +67,7 @@ exports.signUp = async (req) => {
       });
   } else if (!req.file) {
     //Insert the user in database with default image
-    await pool.query(
+    await client.query(
       "INSERT INTO person (id_uid, person_name, password, person_image) VALUES($1, $2, $3, $4)",
       [
         uuid_generate.v4(),

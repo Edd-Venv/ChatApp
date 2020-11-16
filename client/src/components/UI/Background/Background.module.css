@@ -2,12 +2,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
   z-index: 5;
   left: 0;
   right: 0;
   position: fixed;
-  overflow-y: auto;
 }
 .BackGroundImg {
   background-image: url("../../../assets/images/background/chatbackground.jpg");
@@ -33,6 +32,20 @@
     -moz-filter: blur(3px);
     -o-filter: blur(3px);
     -ms-filter: blur(3px);
-    filter: blur(3px);
+    filter: blur(2px);
+  }
+  .Container {
+    height: 25vh;
+  }
+}
+
+@media (min-width: 600px) {
+  .Container {
+    height: 75vh;
+  }
+}
+@media (min-width: 700px) {
+  .BackGroundImg {
+    background-image: url("../../../assets/images/background/whatsappdesk.jpg");
   }
 }

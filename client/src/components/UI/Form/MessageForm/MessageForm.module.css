@@ -1,0 +1,76 @@
+.UL {
+  display: flex;
+  flex-direction: column;
+  padding-inline-start: 0px;
+  list-style-type: none;
+  padding-bottom: 60px;
+}
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  max-width: 90vw;
+}
+
+.Form {
+  display: flex;
+  position: fixed;
+  bottom: 16px;
+  z-index: 40;
+  max-width: 90vw;
+  border-radius: 14px;
+  border: 12px solid #ffff;
+}
+
+.Input {
+  width: 100vw;
+  border: none;
+  outline: none;
+  letter-spacing: 0.07rem;
+  font-size: 0.9rem;
+  background-color: #f2f2f2;
+}
+
+.SendButton {
+  border: none;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  color: #4723d9;
+  background-color: #f7f6fb;
+  font-size: 0.9rem;
+}
+
+.NoMessages {
+  text-align: center;
+  z-index: 20;
+  font-size: larger;
+}
+
+@media (min-width: 700px) {
+  .Container {
+    max-width: 50vw;
+
+    width: 100vw;
+    margin-left: auto;
+  }
+  .SendButton {
+    font-size: 1.25rem;
+  }
+  .Input {
+    font-size: 1.2rem;
+  }
+  .Form {
+    max-width: 50vw;
+  }
+}
+
+@media (min-width: 1000px) {
+  .Container {
+    max-width: 40vw;
+    margin-left: 32vw;
+  }
+  .Form {
+    max-width: 40vw;
+  }
+}

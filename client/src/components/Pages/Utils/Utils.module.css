@@ -1,0 +1,49 @@
+.LeftTextBox {
+  border: 2px solid;
+  z-index: 20;
+  font-family: "Montserrat", sans-serif;
+  background-color: #f2f2f2;
+  padding: 0.7rem 0.7rem;
+  border-radius: 1rem;
+  border-top-left-radius: 0rem;
+  text-align: start;
+  box-shadow: 0 8px 20px rgba(35, 0, 77, 0.2);
+  width: fit-content;
+  align-self: flex-start;
+  overflow-wrap: break-word;
+  margin: 0.3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.RightTextBox {
+  border: 2px solid;
+  z-index: 20;
+  font-family: "Montserrat", sans-serif;
+  background-color: #f2f2f2;
+  padding: 0.7rem 0.7rem;
+  border-radius: 1rem;
+  border-top-right-radius: 0rem;
+  text-align: start;
+  box-shadow: 0 8px 20px rgba(35, 0, 77, 0.2);
+  width: fit-content;
+  align-self: flex-end;
+  overflow-wrap: break-word;
+  margin: 0.3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 300px) {
+  .LeftTextBox {
+    max-width: 80vw;
+  }
+
+  .RightTextBox {
+    max-width: 80vw;
+  }
+}
+
+.Small {
+  align-self: flex-end;
+}
