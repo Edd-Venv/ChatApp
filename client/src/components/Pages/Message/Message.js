@@ -1,5 +1,12 @@
-import React, { useState, useEffect, useContext, useMemo } from "react";
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useMemo,
+  useCallback,
+} from "react";
 import { Redirect } from "react-router-dom";
+import { SocketContext } from "../../../contexts/socket/socketContext";
 import { AuthContext } from "../../../contexts/auth/authContext";
 import { BaseUrl, socket } from "../../../App";
 import MessageForm from "../../UI/Form/MessageForm/MessageForm";
@@ -9,27 +16,13 @@ import Contacts from "./Contacts/Contacts";
 
 function Message() {
   const [state, dispath] = useContext(AuthContext);
+  const [socketState, socketDispath] = useContext(SocketContext);
   const [message, setMessage] = useState("");
   const [texts, setTexts] = useState([]);
   const { userId, userName, selectedContact, authenticated, jwt } = state;
   const id_uid = useMemo(() => selectedContact.id_uid, [selectedContact]);
 
   useEffect(() => {
-    console.log("rednder");
-    socket.on("received-message", (data) => {
-      console.log("recd", data);
-      messageHandler(
-        data.message,
-        data.from.userName,
-        "recieved",
-        data.timeStamp
-      );
-    });
-    socket.on("sent-message", (data) => {
-      console.log("sebt", data);
-      messageHandler(data.message, data.from.userName, "sent", data.timeStamp);
-    });
-
     if (id_uid !== "dummy")
       fetch(`${BaseUrl}/messages`, {
         method: "POST",
@@ -46,9 +39,22 @@ function Message() {
           if (result.message) console.log("err", result.message);
           else setTexts(result.texts);
         });
-  }, [id_uid]);
 
-  const handleSubmit = (event) => {
+    socket.on("received-message", (dta) => {
+      messageHandler(dta.message, dta.from.userName, "recieved", dta.timeStamp);
+    });
+
+    socket.on("sent-message", (info) => {
+      messageHandler(info.message, info.from.userName, "sent", info.timeStamp);
+    });
+
+    return () => {
+      socket.off("received-message");
+      socket.off("sent-message");
+    };
+  }, [selectedContact]);
+
+  const handleSubmit = useCallback((event) => {
     event.preventDefault();
     const timeStamp = getDate();
     const data = {
@@ -59,11 +65,11 @@ function Message() {
     };
     socket.emit("send-message", data);
     setMessage("");
-  };
+  });
 
-  const handleChange = (event) => {
+  const handleChange = useCallback((event) => {
     if (event.target.name === "input") setMessage(event.target.value);
-  };
+  });
 
   if (!authenticated) return <Redirect to="/sign-in" />;
 

@@ -54,5 +54,5 @@ export const AuthContextProvider = ({ children }) => {
   );
 };
 AuthContextProvider.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.object,
 };

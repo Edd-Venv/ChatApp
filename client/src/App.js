@@ -1,7 +1,7 @@
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable import/no-cycle */
 import "./App.css";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import io from "socket.io-client";
 import { Route } from "react-router-dom";
 import Layout from "./containers/Layout/Layout";
@@ -11,12 +11,13 @@ import Message from "./components/Pages/Message/Message";
 import SignIn from "./components/Pages/SignIn/SignIn";
 import Contacts from "./components/Pages/Contacts/Contacts";
 import Home from "./components/Pages/Home/Home";
-import SignOut from "./components/Pages/Utils/Utils";
+import { SocketContext } from "./contexts/socket/socketContext";
 
 export const socket = io("https://awschatapp.herokuapp.com");
 export const BaseUrl = "https://awschatapp.herokuapp.com";
 
 function App() {
+  const [, dispatch] = useContext(SocketContext);
   useEffect(() => {
     socket.on("connect", (data) => {
       console.log("app connected");
@@ -24,10 +25,10 @@ function App() {
 
     socket.on("disconnect", () => {
       socket.removeAllListeners();
-      // socket.disconnect(true);
     });
-  });
 
+    dispatch({ type: "SOCKET", socket });
+  }, []);
   return (
     <ErrorBoundary>
       <Layout>

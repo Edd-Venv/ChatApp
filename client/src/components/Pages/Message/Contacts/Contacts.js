@@ -69,4 +69,6 @@ function Contacts() {
   );
 }
 
-export default Contacts;
+export default React.memo(Contacts);
+
+//  (prevProps, nextProps) => prevProps === nextProps

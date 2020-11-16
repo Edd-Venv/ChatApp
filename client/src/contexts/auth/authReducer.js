@@ -33,6 +33,7 @@ const authReducer = (state, action) => {
       };
       return newState;
     }
+
     case LOGOUT: {
       return {
         isLoaded: action.isLoaded,

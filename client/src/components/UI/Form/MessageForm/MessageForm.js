@@ -68,4 +68,4 @@ MessageForm.propTypes = {
   texts: PropTypes.any,
 };
 
-export default MessageForm;
+export default React.memo(MessageForm);

@@ -5,12 +5,11 @@ import { AuthContextProvider } from "../../contexts/auth/authContext";
 
 function Layout(props) {
   const { children } = props;
+  console.log("Layout.js");
   return (
     <div data-test="component-layout" id="bodypd">
-      <AuthContextProvider>
-        <Toolbar />
-        <main>{children}</main>
-      </AuthContextProvider>
+      <Toolbar />
+      <main>{children}</main>
     </div>
   );
 }
