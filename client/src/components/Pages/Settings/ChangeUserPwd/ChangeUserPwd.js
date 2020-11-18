@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Form from "../../../UI/Form/Form";
 import { BaseUrl } from "../../../../App";
-import { changeUserName } from "../Utils/settingsUtils";
+import { changePassword } from "../Utils/settingsUtils";
+import toolTip from "../../../UI/ToolTip/ToolTip";
 
-function ChangeUserName() {
+function changeUserPwd() {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
@@ -15,9 +16,14 @@ function ChangeUserName() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    changeUserName(`${BaseUrl}/account/settings/update/password`, newPassword)
+    changePassword(
+      `${BaseUrl}/account/settings/update/password`,
+      newPassword,
+      oldPassword
+    )
       .then((res) => res.json())
-      .then((result) => {});
+      .then((result) => console.log(result))
+      .catch((err) => toolTip("changeUserPassword", "inputID", "formID", err));
   };
 
   return (
@@ -40,4 +46,4 @@ function ChangeUserName() {
   );
 }
 
-export default ChangeUserName;
+export default changeUserPwd;
