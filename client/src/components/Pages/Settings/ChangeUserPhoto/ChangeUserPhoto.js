@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { BaseUrl } from "../../../../App";
 import { changePhoto } from "../Utils/settingsUtils";
 import Button from "../../../UI/Button/Button";
 import classes from "./ChangeUserPhoto.module.css";
+import { AuthContext } from "../../../../contexts/auth/authContext";
 
 function ChangeUserPhoto() {
+  const [state, dispath] = useContext(AuthContext);
+  const { userImage } = state;
   const [file, setFile] = useState(null);
 
   const handleChange = (event) => {
@@ -21,7 +24,7 @@ function ChangeUserPhoto() {
     if (file)
       changePhoto(`${BaseUrl}/account/settings/update/user-picture`, formData)
         .then((result) => result.json())
-        .then((response) => {});
+        .then((response) => console.log(response));
   };
 
   return (
@@ -31,9 +34,7 @@ function ChangeUserPhoto() {
           <img
             alt="Logo"
             className={classes.Img}
-            src={`https://userspictures.s3.us-east-2.amazonaws.com/${localStorage.getItem(
-              "userImage"
-            )}`}
+            src={`https://userspictures.s3.us-east-2.amazonaws.com/${userImage}`}
           />
         </div>
         <div className={classes.FileUpload}>
