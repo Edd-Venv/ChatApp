@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import Form from "../../../UI/Form/Form";
 import { BaseUrl } from "../../../../App";
 import { changeUserName } from "../Utils/settingsUtils";
+import toolTip from "../../../UI/ToolTip/ToolTip";
 
 function ChangeUserName() {
   const [oldUserName, setOldUserName] = useState("");
@@ -20,7 +22,11 @@ function ChangeUserName() {
       oldUserName
     )
       .then((res) => res.json())
-      .then((result) => {});
+      .then((result) => {
+        if (result.status === "success") return <Redirect to="/sign-out" />;
+        return null;
+      })
+      .catch((err) => toolTip("changeUserName", "inputID", "formID", err));
   };
 
   return (

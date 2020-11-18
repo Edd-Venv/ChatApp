@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import classes from "./NavigationItems.module.css";
 import NavigationItem from "./NavigationItem/NavigationItem";
 import { AuthContext } from "../../../contexts/auth/authContext";
-import SignOut from "../Utils/signOut";
+import SignOut from "../Utils/SignOut";
 import classItem from "./NavigationItem/NavigationItem.module.css";
 
 function NavigationItems() {

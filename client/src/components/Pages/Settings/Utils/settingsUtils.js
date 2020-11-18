@@ -12,7 +12,7 @@ export const changeUserName = (url, username, oldusername) =>
     }),
   });
 
-export const changePassword = (url, password) =>
+export const changePassword = (url, password, oldPassword) =>
   fetch(url, {
     method: "PATCH",
     headers: {
@@ -20,7 +20,8 @@ export const changePassword = (url, password) =>
       Authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
     body: JSON.stringify({
-      password,
+      new_password: password,
+      old_password: oldPassword,
     }),
   });
 
