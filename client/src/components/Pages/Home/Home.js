@@ -73,7 +73,7 @@ function Home() {
               />
             </p>
             <p>
-              <h4>Your ID:</h4> <span id="ID">{`${userId}`}</span>
+              <strong>Your ID:</strong> <span id="ID">{`${userId}`}</span>
               <i
                 id="copyID"
                 className={`bx bx-clipboard ${classes.CopyIcon}`}

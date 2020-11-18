@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import ChangeUserPhoto from "../../../Pages/Settings/ChangeUserPhoto/ChangeUserPhoto";
-import ChangeUserPassword from "../../../Pages/Settings/ChangeUserPasword/ChangeUserPwd";
+import ChangeUserPassword from "../../../Pages/Settings/ChangeUserPwd/ChangeUserPwd";
 import ChangeUserName from "../../../Pages/Settings/ChangeUserName/ChangeUserName";
-import { deleteAccount } from "../../../Pages/Settings/Utils/accountSettings";
+import { deleteAccount } from "../../../Pages/Settings/Utils/settingsUtils";
 import classes from "./SettingsForm.module.css";
 import Button from "../../Button/Button";
 

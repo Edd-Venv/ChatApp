@@ -11,6 +11,7 @@ function NavigationItems() {
   let signIn = null;
   let signUp = null;
   let signOut = null;
+  let settings = null;
 
   if (!authenticated) {
     signIn = (
@@ -37,6 +38,12 @@ function NavigationItems() {
         </a>
       </li>
     );
+    settings = (
+      <NavigationItem link="/settings">
+        <i className={`bx bx-wrench ${classes.Nav_icon}`} />
+        <span className={classes.Nav_name}>Settings</span>
+      </NavigationItem>
+    );
   }
   return (
     <div className={classes.L_navbar} id="nav-bar">
@@ -61,6 +68,7 @@ function NavigationItems() {
           </span>
           {signUp}
           {signOut}
+          {settings}
         </div>
       </nav>
     </div>
