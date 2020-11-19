@@ -30,8 +30,9 @@ function Home() {
         .then((res) => res.json())
         .then((response) => {
           if (response.status === "success")
-            toolTip("home", "inputID", "formID", response.message);
-          else toolTip("home", "inputID", "formID", response.message);
+            toolTip("home", "inputID", "formID", response.message, -818, -146);
+          else
+            toolTip("home", "inputID", "formID", response.message, -818, -146);
           setInput("");
         });
     } catch (error) {
