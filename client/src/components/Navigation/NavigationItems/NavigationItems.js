@@ -32,7 +32,7 @@ function NavigationItems() {
   if (authenticated) {
     signOut = (
       <li className={classItem.Nav_logo}>
-        <a href="/" onClick={() => SignOut()}>
+        <a href="/" onClick={() => SignOut(state, dispatch)}>
           <i className={`bx bx-log-out ${classes.Nav_icon}`} />
           <span className={classes.Nav_name}>Sign Out</span>
         </a>

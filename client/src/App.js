@@ -13,7 +13,6 @@ import Contacts from "./components/Pages/Contacts/Contacts";
 import Home from "./components/Pages/Home/Home";
 import Settings from "./components/Pages/Settings/Settings";
 import { SocketContext } from "./contexts/socket/socketContext";
-import SignOut from "./components/Navigation/Utils/SignOut";
 
 export const socket = io("https://awschatapp.herokuapp.com");
 export const BaseUrl = "https://awschatapp.herokuapp.com";
@@ -40,7 +39,6 @@ function App() {
         <Route path="/sign-up/:token" exact component={SignUp} />
         <Route path="/contacts" exact component={Contacts} />
         <Route path="/settings" exact component={Settings} />
-        <Route path="/sign-out" exact component={SignOut} />
       </Layout>
     </ErrorBoundary>
   );

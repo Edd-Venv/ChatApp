@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
+import PropTypes from "proptypes";
 import Form from "../../../UI/Form/Form";
 import { BaseUrl } from "../../../../App";
 import { changeUserName } from "../Utils/settingsUtils";
 import toolTip from "../../../UI/ToolTip/ToolTip";
 
-function ChangeUserName() {
+function ChangeUserName(props) {
   const [oldUserName, setOldUserName] = useState("");
   const [newUserName, setNewUserName] = useState("");
+  const { signOut } = props;
 
   const handleChange = (event) => {
     if (event.target.name === "new name")
@@ -23,7 +25,7 @@ function ChangeUserName() {
     )
       .then((res) => res.json())
       .then((result) => {
-        if (result.status === "success") return <Redirect to="/sign-out" />;
+        if (result.status === "success") return signOut();
         return null;
       })
       .catch((err) => toolTip("changeUserName", "inputID", "formID", err));
@@ -48,5 +50,7 @@ function ChangeUserName() {
     />
   );
 }
-
+ChangeUserName.propTypes = {
+  signOut: PropTypes.func,
+};
 export default ChangeUserName;

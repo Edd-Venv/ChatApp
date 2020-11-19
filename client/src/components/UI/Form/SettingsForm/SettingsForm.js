@@ -45,10 +45,10 @@ const useSettingsForm = () => {
         ACCOUNT SETTINGS
       </h3>
       <div className={classes.Form}>
-        <ChangeUserPhoto />
+        <ChangeUserPhoto signOut={() => SignOut(state, dispatch)} />
         <div className={classes.InputForm}>
-          <ChangeUserName />
-          <ChangeUserPassword />
+          <ChangeUserName signOut={() => SignOut(state, dispatch)} />
+          <ChangeUserPassword signOut={() => SignOut(state, dispatch)} />
           <Button
             className={classes.Danger}
             buttonClick={() => handleDelete()}
