@@ -15,7 +15,7 @@
 }
 
 .Header_toggle {
-  color: var(--first-color);
+  color: #333131;
   font-size: 1.5rem;
   cursor: pointer;
 }

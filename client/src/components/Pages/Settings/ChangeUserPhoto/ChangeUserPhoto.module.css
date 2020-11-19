@@ -1,0 +1,76 @@
+.Container {
+  display: flex;
+  flex-direction: column;
+  font-family: "Montserrat", sans-serif;
+  background-color: #5c9196;
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(35, 0, 77, 0.2);
+  margin-bottom: 1rem;
+}
+.ImgContainer {
+  align-self: center;
+}
+
+@media (min-width: 300px) {
+  .Img {
+    width: 30vw;
+    border: 5px solid #ededed;
+    border-radius: 60px;
+  }
+
+  .FileUpload {
+    padding: 1.1rem 0.3rem;
+    background-color: #fff;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+    border-color: white;
+  }
+}
+@media (min-width: 400px) {
+  .Img {
+    width: 33vw;
+    border: 8px solid #ededed;
+    border-radius: 70px;
+  }
+}
+@media (min-width: 500px) {
+  .Img {
+    width: 27vw;
+    border-radius: 70px;
+  }
+}
+
+@media (min-width: 700px) {
+  .Container {
+    margin-right: 1rem;
+  }
+  .FileUpload {
+    padding: 1.125rem 1rem;
+  }
+
+  .Img {
+    width: 21vw;
+    border: 5px solid #ededed;
+    border-radius: 80px;
+  }
+}
+@media (min-width: 1020px) {
+  .Img {
+    width: 21vw;
+    border-radius: 130px;
+  }
+}
+@media (min-width: 1200px) {
+  .Img {
+    width: 21vw;
+    border-radius: 130px;
+  }
+}
+@media (min-width: 1440px) {
+  .Img {
+    width: 11vw;
+    border: 11px solid #ededed;
+  }
+}

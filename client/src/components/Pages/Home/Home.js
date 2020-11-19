@@ -30,8 +30,8 @@ function Home() {
         .then((res) => res.json())
         .then((response) => {
           if (response.status === "success")
-            toolTip("home", "inputID", "formID", response.message);
-          else toolTip("home", "inputID", "formID", response.message);
+            toolTip("home", "inputID", "formID", response.message, 0, 500);
+          else toolTip("home", "inputID", "formID", response.message, 0, 500);
           setInput("");
         });
     } catch (error) {
@@ -62,7 +62,7 @@ function Home() {
         </h1>
         <div className={classes.Container}>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <h2>Your contact doesnt have an account?</h2>
+            <h2>Your contact doesnt have an account ?</h2>
             <h3>Share this link with them</h3>
             <p id="URL">
               {`http://localhost:3000/sign-up/${userId}`}
@@ -73,7 +73,7 @@ function Home() {
               />
             </p>
             <p>
-              <h4>Your ID:</h4> <span id="ID">{`${userId}`}</span>
+              <strong>Your ID:</strong> <span id="ID">{`${userId}`}</span>
               <i
                 id="copyID"
                 className={`bx bx-clipboard ${classes.CopyIcon}`}
@@ -82,7 +82,7 @@ function Home() {
             </p>
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <h2>Your contact already has an account?</h2>
+            <h2>Your contact already has an account ?</h2>
             <h3>Add them using thier ID link</h3>
             <form
               onSubmit={handleSubmit}

@@ -4,6 +4,7 @@ import { BaseUrl } from "../../../../App";
 import { AuthContext } from "../../../../contexts/auth/authContext";
 import classes from "./Contacts.module.css";
 import contactClasses from "./Contact/Contact.module.css";
+import Spinner from "../../../UI/Spinner/BoxIcon/BoxIconSpinner";
 
 function Contacts() {
   const [state, dispath] = useContext(AuthContext);
@@ -48,7 +49,7 @@ function Contacts() {
     </>
   );
 
-  if (!contacts) return noContacts;
+  if (!contacts) return <Spinner />;
 
   if (contacts) {
     if (contacts.length === 0) return noContacts;
@@ -64,11 +65,13 @@ function Contacts() {
           Contacts
         </h2>
         {contacts.map((contact) => {
-          return (
-            <div key={contact.id_uid}>
-              <Contact contact={contact} trackSelected={trackSelected} />
-            </div>
-          );
+          if (contact)
+            return (
+              <div key={contact.id_uid}>
+                <Contact contact={contact} trackSelected={trackSelected} />
+              </div>
+            );
+          return null;
         })}
       </div>
     </>
