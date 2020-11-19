@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import PropTypes from "proptypes";
 import Form from "../../../UI/Form/Form";
 import { BaseUrl } from "../../../../App";
 import { changePassword } from "../Utils/settingsUtils";
 import toolTip from "../../../UI/ToolTip/ToolTip";
 
-function changeUserPwd() {
+function ChangeUserPwd(props) {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const { signOut } = props;
 
   const handleChange = (event) => {
     if (event.target.name === "New Password")
@@ -22,7 +24,9 @@ function changeUserPwd() {
       oldPassword
     )
       .then((res) => res.json())
-      .then((result) => console.log(result))
+      .then((result) => {
+        if (result.status === "success") signOut();
+      })
       .catch((err) => toolTip("changeUserPassword", "inputID", "formID", err));
   };
 
@@ -46,4 +50,7 @@ function changeUserPwd() {
   );
 }
 
-export default changeUserPwd;
+ChangeUserPwd.propTypes = {
+  signOut: PropTypes.func,
+};
+export default ChangeUserPwd;

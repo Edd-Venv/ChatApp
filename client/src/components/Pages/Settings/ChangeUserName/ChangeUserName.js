@@ -25,7 +25,10 @@ function ChangeUserName(props) {
     )
       .then((res) => res.json())
       .then((result) => {
-        if (result.status === "success") return signOut();
+        if (result.status === "success") {
+          signOut();
+          return <Redirect to="/" push />;
+        }
         return null;
       })
       .catch((err) => toolTip("changeUserName", "inputID", "formID", err));

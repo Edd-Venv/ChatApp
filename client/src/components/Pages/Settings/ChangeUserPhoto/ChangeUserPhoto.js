@@ -1,14 +1,16 @@
 import React, { useState, useContext } from "react";
+import PropTypes from "proptypes";
 import { BaseUrl } from "../../../../App";
 import { changePhoto } from "../Utils/settingsUtils";
 import Button from "../../../UI/Button/Button";
 import classes from "./ChangeUserPhoto.module.css";
 import { AuthContext } from "../../../../contexts/auth/authContext";
 
-function ChangeUserPhoto() {
+function ChangeUserPhoto(props) {
   const [state, dispath] = useContext(AuthContext);
   const { userImage } = state;
   const [file, setFile] = useState(null);
+  const { signOut } = props;
 
   const handleChange = (event) => {
     const blob = new Blob([event.target.files[0]], { type: "image/jpeg" });
@@ -24,7 +26,9 @@ function ChangeUserPhoto() {
     if (file)
       changePhoto(`${BaseUrl}/account/settings/update/user-picture`, formData)
         .then((result) => result.json())
-        .then((response) => console.log(response));
+        .then((response) => {
+          if (response.status === "successs") signOut();
+        });
   };
 
   return (
@@ -53,6 +57,9 @@ function ChangeUserPhoto() {
   );
 }
 
+ChangeUserPhoto.propTypes = {
+  signOut: PropTypes.func,
+};
 export default ChangeUserPhoto;
 
 // <label htmlFor="photo" />
