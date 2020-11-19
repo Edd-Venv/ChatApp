@@ -5,7 +5,7 @@ import { BaseUrl } from "../../../App";
 import { AuthContext } from "../../../contexts/auth/authContext";
 import BackGroundClasses from "../../UI/Background/Background.module.css";
 import classes from "./Contacts.module.css";
-import Spinner from "../../UI/Spinner/Spinner";
+import Spinner from "../../UI/Spinner/BoxIcon/BoxIconSpinner";
 
 function Contacts() {
   const [state, dispath] = useContext(AuthContext);
@@ -30,10 +30,17 @@ function Contacts() {
 
   if (!authenticated) return <Redirect to="/sign-in" />;
 
-  if (!contacts) return <p>no contacts, please add contacts</p>;
+  const noContacts = (
+    <>
+      <div className={BackGroundClasses.BackGroundImg} />
+      <h2 className={classes.NoContacts}>Please add contacts.</h2>
+    </>
+  );
+
+  if (!contacts) return <Spinner />;
 
   if (contacts) {
-    if (contacts.length === 0) return <p>no contacts, please add contacts</p>;
+    if (contacts.length === 0) return noContacts;
   }
 
   return (
@@ -41,11 +48,13 @@ function Contacts() {
       <div className={BackGroundClasses.BackGroundImg} />
       <div className={classes.Container}>
         {contacts.map((contact) => {
-          return (
-            <div key={contact.id_uid}>
-              <Contact contact={contact} />
-            </div>
-          );
+          if (contact)
+            return (
+              <div key={contact.id_uid}>
+                <Contact contact={contact} />
+              </div>
+            );
+          return null;
         })}
       </div>
     </>

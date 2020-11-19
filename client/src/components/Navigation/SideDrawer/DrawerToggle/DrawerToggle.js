@@ -44,10 +44,3 @@ function DrawerToggle() {
 }
 
 export default DrawerToggle;
-
-/*
-
-<div className={classes.Header_img}>
-          <Logo />
-        </div>
- */

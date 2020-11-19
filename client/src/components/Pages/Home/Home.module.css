@@ -1,20 +1,16 @@
-.UL {
-  display: flex;
-  flex-direction: column;
-  padding-inline-start: 0px;
-  list-style-type: none;
-  padding-bottom: 60px;
-}
-
 .Container {
   display: flex;
   flex-direction: column;
   max-width: 90vw;
+  position: absolute;
+  z-index: 5;
+  color: #f0f8ff;
+  overflow-y: scroll;
 }
 
 .Form {
   display: flex;
-  position: fixed;
+  position: relative;
   bottom: 16px;
   z-index: 40;
   max-width: 90vw;
@@ -31,29 +27,29 @@
   background-color: #f2f2f2;
 }
 
-.SendButton {
+.AddButton {
   border: none;
   display: flex;
   align-items: center;
   padding: 0.5rem;
-  color: #4723d9;
+  color: blue;
   background-color: #f7f6fb;
-  font-size: 0.9rem;
+  font-size: 1rem;
   cursor: pointer;
 }
 
-.NoMessages {
-  text-align: center;
-  z-index: 20;
-  font-size: larger;
+.CopyIcon {
+  font-size: 1.25rem;
+  padding-left: 1rem;
+  cursor: pointer;
 }
-
 @media (min-width: 700px) {
   .Container {
-    max-width: 50vw;
-
+    max-width: 90vw;
+    flex-direction: row;
     width: 100vw;
-    margin-left: auto;
+    margin-left: -6vw;
+    overflow-y: unset;
   }
   .SendButton {
     font-size: 1.25rem;
@@ -62,14 +58,25 @@
     font-size: 1.2rem;
   }
   .Form {
-    max-width: 50vw;
+    max-width: 44vw;
   }
 }
 
 @media (min-width: 1000px) {
   .Container {
+    max-width: 90vw;
+    margin-left: -3vw;
+  }
+  .Form {
     max-width: 40vw;
-    margin-left: 32vw;
+  }
+}
+
+@media (min-width: 1400px) {
+  .Container {
+    max-width: 90vw;
+    margin-left: -3vw;
+    justify-content: space-between;
   }
   .Form {
     max-width: 40vw;

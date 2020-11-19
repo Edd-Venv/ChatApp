@@ -4,6 +4,7 @@ import { BaseUrl } from "../../../../App";
 import { AuthContext } from "../../../../contexts/auth/authContext";
 import classes from "./Contacts.module.css";
 import contactClasses from "./Contact/Contact.module.css";
+import Spinner from "../../../UI/Spinner/BoxIcon/BoxIconSpinner";
 
 function Contacts() {
   const [state, dispath] = useContext(AuthContext);
@@ -42,10 +43,16 @@ function Contacts() {
       ).className = contactClasses.ContactBox;
   };
 
-  if (!contacts) return <p>no contacts, please add contacts</p>;
+  const noContacts = (
+    <>
+      <h2 className={classes.NoContacts}>Please add contacts.</h2>
+    </>
+  );
+
+  if (!contacts) return <Spinner />;
 
   if (contacts) {
-    if (contacts.length === 0) return <p>no contacts, please add contacts</p>;
+    if (contacts.length === 0) return noContacts;
   }
 
   return (
@@ -58,11 +65,13 @@ function Contacts() {
           Contacts
         </h2>
         {contacts.map((contact) => {
-          return (
-            <div key={contact.id_uid}>
-              <Contact contact={contact} trackSelected={trackSelected} />
-            </div>
-          );
+          if (contact)
+            return (
+              <div key={contact.id_uid}>
+                <Contact contact={contact} trackSelected={trackSelected} />
+              </div>
+            );
+          return null;
         })}
       </div>
     </>

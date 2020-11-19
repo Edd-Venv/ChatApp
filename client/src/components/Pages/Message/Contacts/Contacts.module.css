@@ -9,6 +9,11 @@
   overflow-y: scroll;
   height: 100vh;
 }
+.NoContacts {
+  position: absolute;
+  color: aliceblue;
+  z-index: 10;
+}
 
 @media (max-width: 700px) {
   .Container {

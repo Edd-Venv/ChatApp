@@ -33,6 +33,7 @@ function NavigationItem(props) {
       <NavLink
         to={link}
         exact
+        className={classes.Nav_link}
         activeClassName={classes.active}
         onClick={navItemHandler}
       >

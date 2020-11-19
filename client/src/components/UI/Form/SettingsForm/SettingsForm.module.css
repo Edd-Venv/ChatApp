@@ -6,42 +6,43 @@
     z-index: 5;
     left: 0;
     right: 0;
-    position: absolute;
-    overflow-y: scroll;
+    position: relative;
   }
   .Form {
     text-align: center;
-    margin: 0 auto;
     font: 2rem;
     width: fit-content;
-    color: #313638;
+    color: #21242a;
     letter-spacing: 0.15rem;
-    background-color: rgba(242, 242, 242, 0.81);
+    background-color: #c9e5c8;
     font-family: "Oswald", sans-serif;
-    margin-top: 20vh;
+    margin: 7vh auto 0px;
+    padding-top: 4vh;
     display: flex;
     flex-direction: column;
     z-index: 10;
     border-radius: 5px;
+    position: absolute;
   }
   .InputForms {
     display: flex;
     flex-direction: column;
   }
 }
+@media (min-width: 360px) {
+  .Form {
+    margin-left: 6vw;
+  }
+}
 @media (min-width: 400px) {
   .Form {
-    margin-top: 13vh;
-    flex-direction: column;
+    margin-left: 17vw;
   }
   .Inputs {
     margin: 10px;
   }
 }
 @media (min-width: 500px) {
-  .Form {
-    margin-top: 15vh;
-  }
   .Inputs {
     margin: 10px;
   }
@@ -49,8 +50,8 @@
 @media (min-width: 768px) {
   .Form {
     font: 2rem;
-    margin-top: 13vh;
     flex-direction: row;
+    margin-left: -4vw;
   }
   .Inputs {
     margin: 14px;
@@ -60,7 +61,7 @@
 @media (min-width: 1024px) {
   .Form {
     font: 2rem;
-    margin-top: 0vh;
+    margin-left: 9.5vw;
     justify-content: space-evenly;
   }
   .Inputs {
@@ -71,6 +72,7 @@
 @media (min-width: 1440px) {
   .Form {
     width: 55vw;
+    margin-left: 14.5vw;
     font: 2rem;
   }
 }

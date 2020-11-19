@@ -10,7 +10,7 @@
 }
 .BackGroundImg {
   background-image: url("../../../assets/images/background/chatbackground.jpg");
-  background-size: contain;
+  background-size: cover;
   position: fixed;
   left: 0;
   right: 0;
@@ -22,7 +22,7 @@
   -moz-filter: blur(1px);
   -o-filter: blur(1px);
   -ms-filter: blur(1px);
-  filter: blur(1px);
+  filter: blur(0.6px);
 }
 
 @media (min-width: 500px) {
