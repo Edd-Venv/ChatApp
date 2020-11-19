@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import ChangeUserPhoto from "../../../Pages/Settings/ChangeUserPhoto/ChangeUserPhoto";
 import ChangeUserPassword from "../../../Pages/Settings/ChangeUserPwd/ChangeUserPwd";
@@ -6,11 +6,31 @@ import ChangeUserName from "../../../Pages/Settings/ChangeUserName/ChangeUserNam
 import { deleteAccount } from "../../../Pages/Settings/Utils/settingsUtils";
 import classes from "./SettingsForm.module.css";
 import Button from "../../Button/Button";
+import { BaseUrl } from "../../../../App";
+import SignOut from "../../../Navigation/Utils/SignOut";
+import { AuthContext } from "../../../../contexts/auth/authContext";
 
 const useSettingsForm = () => {
-  const [state, setState] = useState({ redirect: false });
+  const [redirect, setRedirect] = useState(false);
+  const [state, dispatch] = useContext(AuthContext);
 
-  if (state.redirect) return <Redirect to="/signout" push />;
+  const handleDelete = async () => {
+    await deleteAccount(`${BaseUrl}/delete/account`)
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.status === "success") {
+          SignOut(state, dispatch);
+          setRedirect({ redirect: true });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        throw new Error(error);
+      });
+  };
+
+  if (redirect) return <Redirect to="/" />;
+
   return (
     <div className={classes.Container}>
       {" "}
@@ -31,12 +51,7 @@ const useSettingsForm = () => {
           <ChangeUserPassword />
           <Button
             className={classes.Danger}
-            buttonClick={async () => {
-              await deleteAccount(
-                "https://edd-venv-map.herokuapp.com/delete/account"
-              );
-              setState({ redirect: true });
-            }}
+            buttonClick={() => handleDelete()}
             buttonType="submit"
           >
             DELETE USER

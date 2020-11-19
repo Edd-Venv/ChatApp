@@ -64,11 +64,13 @@ function Contacts() {
           Contacts
         </h2>
         {contacts.map((contact) => {
-          return (
-            <div key={contact.id_uid}>
-              <Contact contact={contact} trackSelected={trackSelected} />
-            </div>
-          );
+          if (contact)
+            return (
+              <div key={contact.id_uid}>
+                <Contact contact={contact} trackSelected={trackSelected} />
+              </div>
+            );
+          return null;
         })}
       </div>
     </>

@@ -34,24 +34,11 @@ export const changePhoto = (url, formData) =>
     body: formData,
   });
 
-export const deleteAccount = (url) => {
+export const deleteAccount = (url) =>
   fetch(url, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
-    body: JSON.stringify({
-      _id: localStorage.getItem("_id"),
-    }),
-  })
-    .then((res) => res.json())
-    .then((result) => {
-      if (result.status === "ok") return null;
-      return result;
-    })
-    .catch((error) => {
-      console.log(error);
-      throw new Error(error);
-    });
-};
+  });

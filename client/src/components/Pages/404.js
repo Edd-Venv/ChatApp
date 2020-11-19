@@ -15,7 +15,7 @@ const notAuthorized = () => {
 
   return (
     <Background>
-      <p style={style}>You`&apos;`re not authorized, please Sign In.</p>
+      <p style={style}>You&apos;re not authorized, please Sign In.</p>
     </Background>
   );
 };

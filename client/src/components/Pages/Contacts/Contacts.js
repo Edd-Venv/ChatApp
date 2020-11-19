@@ -48,11 +48,13 @@ function Contacts() {
       <div className={BackGroundClasses.BackGroundImg} />
       <div className={classes.Container}>
         {contacts.map((contact) => {
-          return (
-            <div key={contact.id_uid}>
-              <Contact contact={contact} />
-            </div>
-          );
+          if (contact)
+            return (
+              <div key={contact.id_uid}>
+                <Contact contact={contact} />
+              </div>
+            );
+          return null;
         })}
       </div>
     </>

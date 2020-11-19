@@ -1,22 +1,15 @@
-import React, { useState, useContext } from "react";
-import { Redirect } from "react-router-dom";
-import { AuthContext, initialState } from "../../../contexts/auth/authContext";
+import React from "react";
+import { initialState } from "../../../contexts/auth/authContext";
 import { socket } from "../../../App";
+import Spinner from "../../UI/Spinner/Spinner";
 
-function SignOut() {
-  const [redirect, setRedirect] = useState(false);
-  const [, dispatch] = useContext(AuthContext);
+function SignOut(state, dispatch) {
+  const oldState = Object.assign({}, initialState);
+  oldState.type = "LOGOUT";
+  dispatch(oldState);
+  socket.disconnect(true);
 
-  setRedirect(() => {
-    const oldState = Object.assign({}, initialState);
-    oldState.type = "LOGOUT";
-    dispatch(oldState);
-    socket.disconnect(true);
-    return true;
-  });
-
-  if (redirect) return <Redirect to="/" />;
-  return null;
+  return <Spinner />;
 }
 
 export default SignOut;
