@@ -1,6 +1,13 @@
 import classes from "./ToolTip.module.css";
 
-const handleToolTip = (tooltipId, inputId, formId, message) => {
+const handleToolTip = (
+  tooltipId,
+  inputId,
+  formId,
+  message,
+  left = 50,
+  top = 68
+) => {
   if (!document.getElementById(tooltipId)) {
     const toolTip = document.createElement("p");
     toolTip.id = tooltipId;
@@ -13,8 +20,8 @@ const handleToolTip = (tooltipId, inputId, formId, message) => {
 
       // const hostElHeight = hostElement.clientHeight;
 
-      const x = hostElPosLeft + 50;
-      const y = hostElPosTop - 68;
+      const x = hostElPosLeft + left;
+      const y = hostElPosTop - top;
       toolTip.className = classes.ToolTip;
       toolTip.style.left = `${x}px`;
       toolTip.style.top = `${y}px`;

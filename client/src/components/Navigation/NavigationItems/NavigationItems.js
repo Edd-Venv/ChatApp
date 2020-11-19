@@ -17,14 +17,14 @@ function NavigationItems() {
     signIn = (
       <NavigationItem link="/sign-in">
         <i className={`bx bx-log-in ${classes.Nav_icon}`} />
-        <span className={classes.Nav_name}>Sign In</span>
+        <span className={classes.Nav_logo_name}>Sign In</span>
       </NavigationItem>
     );
 
     signUp = (
       <NavigationItem link="/sign-up/none">
         <i className={`bx bx-log-in-circle ${classes.Nav_icon}`} />
-        <span className={classes.Nav_name}>Sign Up</span>
+        <span className={classes.Nav_logo_name}>Sign Up</span>
       </NavigationItem>
     );
   }
@@ -32,16 +32,20 @@ function NavigationItems() {
   if (authenticated) {
     signOut = (
       <li className={classItem.Nav_logo}>
-        <a href="/" onClick={() => SignOut(state, dispatch)}>
+        <a
+          href="/"
+          className={classes.Nav_link}
+          onClick={() => SignOut(state, dispatch)}
+        >
           <i className={`bx bx-log-out ${classes.Nav_icon}`} />
-          <span className={classes.Nav_name}>Sign Out</span>
+          <span className={classes.Nav_logo_name}>Sign Out</span>
         </a>
       </li>
     );
     settings = (
       <NavigationItem link="/settings">
         <i className={`bx bx-wrench ${classes.Nav_icon}`} />
-        <span className={classes.Nav_name}>Settings</span>
+        <span className={classes.Nav_logo_name}>Settings</span>
       </NavigationItem>
     );
   }
@@ -51,19 +55,19 @@ function NavigationItems() {
         <div>
           <NavigationItem link="/">
             <i className={`bx bx-home ${classes.Nav_icon}`} />
-            <span className={classes.Nav_name}>Home</span>
+            <span className={classes.Nav_logo_name}>Home</span>
           </NavigationItem>
           {signIn}
           <span className={classes.MobileOnly}>
             <NavigationItem link="/contacts">
               <i className={`bx bxs-contact ${classes.Nav_icon}`} />
-              <span className={classes.Nav_name}>Contacts</span>
+              <span className={classes.Nav_logo_name}>Contacts</span>
             </NavigationItem>
           </span>
           <span className={classes.DesktopOnly}>
             <NavigationItem link="/messages">
               <i className={`bx bx-message-detail  ${classes.Nav_icon}`} />
-              <span className={classes.Nav_name}>Messages</span>
+              <span className={classes.Nav_logo_name}>Messages</span>
             </NavigationItem>
           </span>
           {signUp}

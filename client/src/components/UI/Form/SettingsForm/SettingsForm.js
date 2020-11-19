@@ -33,17 +33,6 @@ const useSettingsForm = () => {
 
   return (
     <div className={classes.Container}>
-      {" "}
-      <h3
-        style={{
-          fontFamily: "Oswald, sans-serif",
-          textAlign: "center",
-          color: "black",
-          marginTop: "10vh",
-        }}
-      >
-        ACCOUNT SETTINGS
-      </h3>
       <div className={classes.Form}>
         <ChangeUserPhoto signOut={() => SignOut(state, dispatch)} />
         <div className={classes.InputForm}>

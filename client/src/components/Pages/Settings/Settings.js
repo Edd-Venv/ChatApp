@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../../contexts/auth/authContext";
-import Background from "../../UI/Background/Background";
+
+import BackGroundClasses from "../../UI/Background/Background.module.css";
 import Spinner from "../../UI/Spinner/Spinner";
 import NotAuthorized from "../404";
 import SettingsForm from "../../UI/Form/SettingsForm/SettingsForm";
@@ -12,9 +13,10 @@ function Settings() {
   if (state.isLoading) return <Spinner />;
 
   return (
-    <Background data_test="component-settings">
+    <>
+      <div className={BackGroundClasses.BackGroundImg} />
       <SettingsForm />
-    </Background>
+    </>
   );
 }
 
