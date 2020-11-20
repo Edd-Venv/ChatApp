@@ -5,11 +5,13 @@ import classes from "./Contact.module.css";
 import { AuthContext } from "../../../../../contexts/auth/authContext";
 
 function Contact(props) {
-  const [, dispath] = useContext(AuthContext);
+  const [state, dispath] = useContext(AuthContext);
   const { contact, trackSelected } = props;
   const { person_name, person_image, id_uid } = contact;
 
   const contactHandler = (selectedContact) => {
+    if (state.selectedContact.id_uid === selectedContact.id_uid) return;
+
     trackSelected(`contact-${selectedContact.id_uid}`);
     dispath({ type: "SELECTEDCONTACT", selectedContact });
   };
@@ -21,8 +23,11 @@ function Contact(props) {
       className={classes.ContactBox}
       onClick={contactHandler.bind(this, contact)}
     >
-      <span>{person_name}</span>
       <Logo image={person_image} />
+      <div className={classes.ContactBoxInfo}>
+        <span className={classes.ContactName}>{person_name}</span>
+        <small>Status: Hi there</small>
+      </div>
     </div>
   );
 }
