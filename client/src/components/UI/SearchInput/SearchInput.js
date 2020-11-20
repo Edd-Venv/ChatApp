@@ -5,7 +5,7 @@ const searchInput = (props) => {
   const { value, handleChange, placeHolder } = props;
   return (
     <div className={classes.InputContainer} id="input">
-      <i className="fa fa-search" />
+      <i className={`bx bx-search ${classes.Icon}`} />
       <input
         autoComplete="off"
         className={classes.InputStyle}
