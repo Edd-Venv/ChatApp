@@ -1,10 +1,46 @@
 import classes from "./Utils.module.css";
+import messageFormClasses from "../../UI/Form/MessageForm/MessageForm.module.css";
 
 export function getDate() {
   const d = new Date();
   const hour = d.getHours();
   const mins = d.getMinutes();
   return `${hour}:${mins}`;
+}
+
+export function typingFeedbackHandler(status, info) {
+  const feedback = document.getElementById("feedback");
+  const messagesFeed = document.getElementById("ul");
+
+  switch (status) {
+    case "TYPING": {
+      if (feedback) {
+        const p = document.createElement("p");
+        const em = document.createElement("em");
+        em.innerHTML = `${info.from} is typing...`;
+        p.innerHTML = em.innerHTML;
+        feedback.innerHTML = p.innerHTML;
+        feedback.className = messageFormClasses.Typing;
+        feedback.style.display = "flex";
+        feedback.scrollIntoView({ smooth: true });
+        messagesFeed.style.paddingBottom = 0;
+      }
+      break;
+    }
+
+    case "NOTTYPING": {
+      if (feedback) {
+        feedback.innerHTML = "";
+        feedback.style.display = "none";
+        messagesFeed.style.paddingBottom = "60px";
+      }
+      break;
+    }
+
+    default:
+      return null;
+  }
+  return null;
 }
 
 function messageHandler(message, userName, status, timeStamp, image) {

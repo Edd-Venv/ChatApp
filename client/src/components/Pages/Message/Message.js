@@ -10,9 +10,8 @@ import { SocketContext } from "../../../contexts/socket/socketContext";
 import { AuthContext } from "../../../contexts/auth/authContext";
 import { BaseUrl, socket } from "../../../App";
 import MessageForm from "../../UI/Form/MessageForm/MessageForm";
-import messageHandler, { getDate } from "../Utils/Utils";
+import messageHandler, { getDate, typingFeedbackHandler } from "../Utils/Utils";
 import classes from "./Message.module.css";
-import messageFormClasses from "../../UI/Form/MessageForm/MessageForm.module.css";
 import Contacts from "./Contacts/Contacts";
 
 function Message() {
@@ -51,13 +50,7 @@ function Message() {
         });
 
     socket.on("received-message", (dta) => {
-      const feedback = document.getElementById("feedback");
-      const messagesFeed = document.getElementById("ul");
-      if (feedback) {
-        feedback.innerHTML = "";
-        feedback.style.display = "none";
-        messagesFeed.style.paddingBottom = "60px";
-      }
+      typingFeedbackHandler("NOTTYPING");
       messageHandler(
         dta.message,
         dta.from.userName,
@@ -78,20 +71,7 @@ function Message() {
     });
 
     socket.on("typing", (info) => {
-      const feedback = document.getElementById("feedback");
-      const messagesFeed = document.getElementById("ul");
-
-      if (feedback) {
-        const p = document.createElement("p");
-        const em = document.createElement("em");
-        em.innerHTML = `${info.from} is typing...`;
-        p.innerHTML = em.innerHTML;
-        feedback.innerHTML = p.innerHTML;
-        feedback.className = messageFormClasses.Typing;
-        feedback.style.display = "flex";
-        feedback.scrollIntoView({ smooth: true });
-        messagesFeed.style.paddingBottom = 0;
-      }
+      typingFeedbackHandler("TYPING", info);
     });
 
     return () => {

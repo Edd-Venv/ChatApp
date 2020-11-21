@@ -43,6 +43,9 @@ function MessageForm(props) {
         <div id="feedback" />
 
         <form onSubmit={onSubmit} autoComplete="off" className={classes.Form}>
+          <button className={classes.SendButton}>
+            <i className="bx bx-smile" />
+          </button>
           <input
             onKeyPress={onKeyPress}
             onChange={onChange}
