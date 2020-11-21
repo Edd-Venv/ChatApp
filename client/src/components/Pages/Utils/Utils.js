@@ -7,11 +7,16 @@ export function getDate() {
   return `${hour}:${mins}`;
 }
 
-function messageHandler(message, userName, status, timeStamp) {
+function messageHandler(message, userName, status, timeStamp, image) {
+  const feed = document.getElementById("ul");
+  const img = document.createElement("img");
   const text = document.createElement("li");
+  const div = document.createElement("div");
   const p = document.createElement("p");
   const small = document.createElement("small");
 
+  img.src = `https://userspictures.s3.us-east-2.amazonaws.com/${image}`;
+  img.className = classes.Img;
   p.innerText = message;
   small.innerText = timeStamp;
   small.className = classes.Small;
@@ -19,12 +24,21 @@ function messageHandler(message, userName, status, timeStamp) {
 
   text.innerHTML = `${p.innerHTML}`;
 
-  if (status === "recieved") text.className = classes.LeftTextBox;
-  if (status === "sent") text.className = classes.RightTextBox;
+  if (status === "recieved") {
+    div.className = classes.Left;
+    text.className = classes.LeftTextBox;
+    div.prepend(img);
+    div.appendChild(text);
+  }
 
-  document
-    .getElementById("ul")
-    .appendChild(text)
-    .scrollIntoView({ smooth: true });
+  if (status === "sent") {
+    div.className = classes.Right;
+    text.className = classes.RightTextBox;
+
+    div.appendChild(text);
+    div.append(img);
+  }
+
+  feed.appendChild(div).scrollIntoView({ smooth: true });
 }
 export default messageHandler;

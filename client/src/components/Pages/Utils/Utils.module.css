@@ -1,3 +1,13 @@
+.Left {
+  display: flex;
+  align-self: flex-start;
+}
+
+.Right {
+  display: flex;
+  align-self: flex-end;
+}
+
 .LeftTextBox {
   border: 2px solid;
   z-index: 20;
@@ -46,4 +56,42 @@
 
 .Small {
   align-self: flex-end;
+}
+
+@media (min-width: 300px) {
+  .Img {
+    width: 7vw;
+    align-self: end;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    z-index: 20;
+  }
+}
+
+@media (min-width: 400px) {
+  .Img {
+    width: 7vw;
+  }
+}
+@media (min-width: 500px) {
+  .Img {
+    width: 8vw;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+  }
+}
+@media (min-width: 700px) {
+  .Img {
+    width: 3vw;
+  }
+}
+
+@media (min-width: 1440px) {
+  .Img {
+    width: 2vw;
+  }
 }
