@@ -3,9 +3,12 @@ import PropTypes from "proptypes";
 import BackGroundClasses from "../../Background/Background.module.css";
 import classes from "./MessageForm.module.css";
 import messageHandler from "../../../Pages/Utils/Utils";
+import Spinner from "../../Spinner/BoxIcon/BoxIconSpinner";
 
 function MessageForm(props) {
-  const { onChange, onSubmit, value, texts } = props;
+  const { onChange, onSubmit, value, texts, onKeyPress, state } = props;
+  const { userImage, selectedContact } = state;
+  const { person_image } = selectedContact;
 
   useEffect(() => {
     if (texts.length > 0) {
@@ -17,35 +20,31 @@ function MessageForm(props) {
             texts[0].texts[j].message,
             "test",
             "sent",
-            texts[0].texts[j].timeStamp
+            texts[0].texts[j].timeStamp,
+            userImage
           );
         else
           messageHandler(
             texts[0].texts[j].message,
             "test",
             "recieved",
-            texts[0].texts[j].timeStamp
+            texts[0].texts[j].timeStamp,
+            person_image
           );
       }
     }
   }, [texts]);
 
-  /* if (texts.length === 0) {
-    const p = document.createElement("p");
-    p.className = classes.NoMessages;
-    p.innerHTML = "no messages";
-    if (document.getElementById("ul")) {
-      document.getElementById("ul").innerHTML = p.innerHTML;
-    }
-  }
-*/
   return (
     <>
+      <div className={BackGroundClasses.BackGroundImg} />
       <div className={classes.Container}>
         <ul id="ul" className={classes.UL} />
-        <div className={BackGroundClasses.BackGroundImg} />
+        <div id="feedback" />
+
         <form onSubmit={onSubmit} autoComplete="off" className={classes.Form}>
           <input
+            onKeyPress={onKeyPress}
             onChange={onChange}
             name="input"
             value={value}
@@ -66,6 +65,10 @@ MessageForm.propTypes = {
   onSubmit: PropTypes.func,
   value: PropTypes.string,
   texts: PropTypes.any,
+  onKeyPress: PropTypes.func,
+  state: PropTypes.any,
 };
 
-export default React.memo(MessageForm);
+export default MessageForm;
+
+// <div className={BackGroundClasses.BackGroundImg} />
