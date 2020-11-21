@@ -9,7 +9,7 @@ import Spinner from "../../UI/Spinner/BoxIcon/BoxIconSpinner";
 
 function Contacts() {
   const [state, dispath] = useContext(AuthContext);
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(null);
   const { jwt, userId, userName, authenticated } = state;
 
   useEffect(() => {

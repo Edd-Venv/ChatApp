@@ -5,7 +5,19 @@
   list-style-type: none;
   padding-bottom: 60px;
 }
-
+.Typing {
+  background-color: rgba(0, 0, 0, 0.45);
+  border: 2px solid;
+  z-index: 20;
+  padding: 0.1rem 0.7rem;
+  border-radius: 1rem;
+  border-top-left-radius: 0rem;
+  width: fit-content;
+  margin: 0.3rem;
+  margin-bottom: 11vh;
+  color: #f7f6fb;
+  display: flex;
+}
 .Container {
   display: flex;
   flex-direction: column;
@@ -68,10 +80,20 @@
 
 @media (min-width: 1000px) {
   .Container {
-    max-width: 40vw;
-    margin-left: 32vw;
+    max-width: 46vw;
+    margin-left: 36vw;
   }
   .Form {
-    max-width: 40vw;
+    max-width: 46vw;
+  }
+}
+
+@media (min-width: 1300px) {
+  .Container {
+    max-width: 46vw;
+    margin-left: 36vw;
+  }
+  .Form {
+    max-width: 46vw;
   }
 }

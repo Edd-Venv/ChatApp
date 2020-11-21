@@ -10,7 +10,7 @@ import { SocketContext } from "../../../contexts/socket/socketContext";
 import { AuthContext } from "../../../contexts/auth/authContext";
 import { BaseUrl, socket } from "../../../App";
 import MessageForm from "../../UI/Form/MessageForm/MessageForm";
-import messageHandler, { getDate } from "../Utils/Utils";
+import messageHandler, { getDate, typingFeedbackHandler } from "../Utils/Utils";
 import classes from "./Message.module.css";
 import Contacts from "./Contacts/Contacts";
 
@@ -19,7 +19,14 @@ function Message() {
   const [socketState, socketDispath] = useContext(SocketContext);
   const [message, setMessage] = useState("");
   const [texts, setTexts] = useState([]);
-  const { userId, userName, selectedContact, authenticated, jwt } = state;
+  const {
+    userId,
+    userName,
+    selectedContact,
+    authenticated,
+    jwt,
+    userImage,
+  } = state;
   const id_uid = useMemo(() => selectedContact.id_uid, [selectedContact]);
 
   useEffect(() => {
@@ -37,22 +44,47 @@ function Message() {
         .then((res) => res.json())
         .then((result) => {
           if (result.message) console.log("err", result.message);
-          else setTexts(result.texts);
+          else {
+            setTexts(result.texts);
+          }
         });
 
     socket.on("received-message", (dta) => {
-      messageHandler(dta.message, dta.from.userName, "recieved", dta.timeStamp);
+      typingFeedbackHandler("NOTTYPING");
+      messageHandler(
+        dta.message,
+        dta.from.userName,
+        "recieved",
+        dta.timeStamp,
+        selectedContact.person_image
+      );
     });
 
     socket.on("sent-message", (info) => {
-      messageHandler(info.message, info.from.userName, "sent", info.timeStamp);
+      messageHandler(
+        info.message,
+        info.from.userName,
+        "sent",
+        info.timeStamp,
+        userImage
+      );
+    });
+
+    socket.on("typing", (info) => {
+      typingFeedbackHandler("TYPING", info);
     });
 
     return () => {
       socket.off("received-message");
       socket.off("sent-message");
+      socket.off("typing");
     };
   }, [selectedContact]);
+
+  const onKeyPress = useCallback((event) => {
+    const data = { to: id_uid, from: userName };
+    socket.emit("typing", data);
+  });
 
   const handleSubmit = useCallback((event) => {
     event.preventDefault();
@@ -77,10 +109,12 @@ function Message() {
     <div className={classes.Container}>
       <Contacts />
       <MessageForm
+        onKeyPress={onKeyPress}
         texts={texts}
         onChange={handleChange}
         onSubmit={handleSubmit}
         value={message}
+        state={state}
       />
     </div>
   );

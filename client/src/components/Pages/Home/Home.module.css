@@ -6,6 +6,9 @@
   z-index: 5;
   color: #f0f8ff;
   overflow-y: scroll;
+  line-height: 2.1rem;
+  font-size: 1.3rem;
+  letter-spacing: 0.02rem;
 }
 
 .Form {
@@ -43,13 +46,41 @@
   padding-left: 1rem;
   cursor: pointer;
 }
+
+.Instructions {
+  z-index: 10;
+  position: fixed;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  justify-content: center;
+  color: #f0f8ff;
+}
+
+.InstructionsContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.InstructionsParagraph {
+  line-height: 2.1rem;
+  font-size: 1.3rem;
+  letter-spacing: 0.02rem;
+  padding: 1.1rem;
+}
+@media (max-width: 600px) {
+  .Container {
+    background-color: rgba(0, 0, 0, 0.07);
+  }
+}
 @media (min-width: 700px) {
   .Container {
     max-width: 90vw;
-    flex-direction: row;
-    width: 100vw;
+    flex-direction: column;
     margin-left: -6vw;
     overflow-y: unset;
+    padding: 3rem;
   }
   .SendButton {
     font-size: 1.25rem;

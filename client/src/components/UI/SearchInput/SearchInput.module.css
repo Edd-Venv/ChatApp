@@ -4,25 +4,28 @@
   border-bottom-left-radius: 50px;
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
-  background-color: rgba(201, 201, 201, 0.65);
-
+  background-color: rgba(242, 242, 242, 0.8);
   outline: 0;
-  width: 20vw;
+  width: 270px;
   z-index: 5;
   font-size: 1.2em;
   margin: 0 auto;
-  position: fixed;
-  margin-top: 10vh;
-  left: 0;
-  right: 0;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 3vh;
+  padding: 0.3rem;
 }
-
+.Icon {
+  align-self: center;
+}
 .InputStyle {
+  display: inline;
   border: none;
   background-color: rgba(0, 0, 0, 0);
   outline: 0;
-  width: 50vw;
-  font-size: 1.2em;
+  width: 200px;
+  font-size: 1rem;
   font-family: "Roboto Condensed", sans-serif;
 }
 
@@ -34,43 +37,15 @@
   animation-timing-function: ease-in;
   backface-visibility: hidden;
 }
-@media (min-width: 300px) {
-  .InputContainer {
-    width: 60vw;
-    top: 0;
-  }
-}
-@media (min-width: 500px) {
-  .InputContainer {
-    width: 60vw;
-    margin-top: 25vh;
-  }
-}
-@media (min-width: 700px) {
-  .InputContainer {
-    width: 45vw;
-    margin-top: 10vh;
-  }
-  .InputStyle {
-    width: 40vw;
-  }
-}
+
 @media (min-width: 1000px) {
   .InputContainer {
-    width: 38vw;
-    margin-top: 10vh;
-  }
-  .InputStyle {
-    width: 35vw;
+    padding: 0.2rem;
   }
 }
 @media (min-width: 1250px) {
   .InputContainer {
-    width: 28vw;
-    margin-top: 10vh;
-  }
-  .InputStyle {
-    width: 25vw;
+    padding: 0.25rem;
   }
 }
 @keyframes bounce {
