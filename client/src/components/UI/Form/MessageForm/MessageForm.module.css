@@ -23,7 +23,16 @@
   flex-direction: column;
   max-width: 90vw;
 }
+.PickerContainer {
+  display: none;
+  z-index: 30;
+  align-self: center;
+}
 
+.ShowPicker {
+  display: block;
+  padding-bottom: 80px;
+}
 .Form {
   display: flex;
   position: fixed;

@@ -1,12 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import Picker from "emoji-picker-react";
 import PropTypes from "proptypes";
 import BackGroundClasses from "../../Background/Background.module.css";
 import classes from "./MessageForm.module.css";
 import messageHandler from "../../../Pages/Utils/Utils";
-import Spinner from "../../Spinner/BoxIcon/BoxIconSpinner";
 
 function MessageForm(props) {
-  const { onChange, onSubmit, value, texts, onKeyPress, state } = props;
+  const {
+    onChange,
+    onSubmit,
+    value,
+    texts,
+    onKeyPress,
+    state,
+    onEmojiClick,
+    emojiHandler,
+  } = props;
   const { userImage, selectedContact } = state;
   const { person_image } = selectedContact;
 
@@ -41,9 +50,15 @@ function MessageForm(props) {
       <div className={classes.Container}>
         <ul id="ul" className={classes.UL} />
         <div id="feedback" />
-
+        <div id="picker" className={classes.PickerContainer}>
+          <Picker onEmojiClick={onEmojiClick} />
+        </div>
         <form onSubmit={onSubmit} autoComplete="off" className={classes.Form}>
-          <button className={classes.SendButton}>
+          <button
+            className={classes.SendButton}
+            onClick={emojiHandler}
+            type="button"
+          >
             <i className="bx bx-smile" />
           </button>
           <input
@@ -70,6 +85,8 @@ MessageForm.propTypes = {
   texts: PropTypes.any,
   onKeyPress: PropTypes.func,
   state: PropTypes.any,
+  onEmojiClick: PropTypes.func,
+  emojiHandler: PropTypes.func,
 };
 
 export default MessageForm;

@@ -12,6 +12,7 @@ import { BaseUrl, socket } from "../../../App";
 import MessageForm from "../../UI/Form/MessageForm/MessageForm";
 import messageHandler, { getDate, typingFeedbackHandler } from "../Utils/Utils";
 import classes from "./Message.module.css";
+import messageFormClasses from "../../UI/Form/MessageForm/MessageForm.module.css";
 import Contacts from "./Contacts/Contacts";
 
 function Message() {
@@ -99,8 +100,23 @@ function Message() {
     setMessage("");
   });
 
+  const emojiHandler = useCallback(() => {
+    const emojiContainer = document.getElementById("picker");
+    if (emojiContainer) {
+      emojiContainer.classList.toggle(messageFormClasses.ShowPicker);
+      emojiContainer.scrollIntoView({ smooth: true });
+    }
+  });
+
   const handleChange = useCallback((event) => {
     if (event.target.name === "input") setMessage(event.target.value);
+  });
+
+  const onEmojiClick = useCallback((event, emojiObject) => {
+    setMessage(() => {
+      emojiHandler();
+      return message + emojiObject.emoji;
+    });
   });
 
   if (!authenticated) return <Redirect to="/sign-in" />;
@@ -109,12 +125,14 @@ function Message() {
     <div className={classes.Container}>
       <Contacts />
       <MessageForm
+        emojiHandler={emojiHandler}
         onKeyPress={onKeyPress}
         texts={texts}
         onChange={handleChange}
         onSubmit={handleSubmit}
         value={message}
         state={state}
+        onEmojiClick={onEmojiClick}
       />
     </div>
   );
