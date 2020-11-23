@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 import React, { useContext, useState, useEffect } from "react";
-import Contact from "./Contact/Contact";
+import Contact from "./DesktopContact/Contact";
 import { BaseUrl, socket } from "../../../../App";
 import { AuthContext } from "../../../../contexts/auth/authContext";
 import classes from "./Contacts.module.css";

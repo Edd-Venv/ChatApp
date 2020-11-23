@@ -13,7 +13,7 @@ import MessageForm from "../../UI/Form/MessageForm/MessageForm";
 import messageHandler, { getDate, typingFeedbackHandler } from "../Utils/Utils";
 import classes from "./Message.module.css";
 import messageFormClasses from "../../UI/Form/MessageForm/MessageForm.module.css";
-import Contacts from "./Contacts/Contacts";
+import Contacts from "./DesktopContacts/Contacts";
 
 function Message() {
   const [state, dispath] = useContext(AuthContext);
