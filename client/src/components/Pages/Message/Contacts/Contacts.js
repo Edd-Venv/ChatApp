@@ -30,6 +30,7 @@ function Contacts() {
       });
 
     socket.on("online-users", (data) => {
+      console.log("contacts desktop versyion", data);
       dispatch({ type: "ONLINESTATUS", onlineUsers: data });
     });
 
@@ -95,4 +96,4 @@ function Contacts() {
   );
 }
 
-export default React.memo(Contacts);
+export default Contacts;

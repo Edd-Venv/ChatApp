@@ -18,6 +18,7 @@ function Contact(props) {
   };
 
   useEffect(() => {
+    console.log("desktop version contact.js", onlineUsers);
     if (onlineUsers) {
       const onlineStatusHandler = () => {
         const onlineIcon = document.getElementById("onlineStatus");

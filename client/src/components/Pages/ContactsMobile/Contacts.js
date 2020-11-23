@@ -31,6 +31,7 @@ function Contacts() {
       });
 
     socket.on("online-users", (data) => {
+      console.log("contacts mobile version", data);
       dispatch({ type: "ONLINESTATUS", onlineUsers: data });
     });
 
