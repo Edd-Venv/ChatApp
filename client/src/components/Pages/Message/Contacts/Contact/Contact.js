@@ -8,13 +8,27 @@ function Contact(props) {
   const [state, dispath] = useContext(AuthContext);
   const { contact, trackSelected } = props;
   const { person_name, person_image, id_uid } = contact;
-
+  const { onlineUsers } = state;
+  console.log("onlineUsers", onlineUsers);
   const contactHandler = (selectedContact) => {
     if (state.selectedContact.id_uid === selectedContact.id_uid) return;
 
     trackSelected(`contact-${selectedContact.id_uid}`);
     dispath({ type: "SELECTEDCONTACT", selectedContact });
   };
+
+  useEffect(() => {
+    const onlineStatusHandler = () => {
+      const onlineIcon = document.getElementById("onlineStatus");
+
+      for (let i = 0; i < onlineUsers.length; i++) {
+        if (onlineUsers[i] === id_uid) {
+          onlineIcon.style.color = "green";
+        }
+      }
+    };
+    onlineStatusHandler();
+  }, []);
 
   return (
     <div
@@ -28,6 +42,10 @@ function Contact(props) {
         <span className={classes.ContactName}>{person_name}</span>
         <small>Status: Hi there</small>
       </div>
+      <i
+        className={`bx bxs-bullseye ${classes.OnlineIcon}`}
+        id="onlineStatus"
+      />
     </div>
   );
 }

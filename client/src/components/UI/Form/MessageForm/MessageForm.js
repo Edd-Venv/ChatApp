@@ -59,7 +59,7 @@ function MessageForm(props) {
             onClick={emojiHandler}
             type="button"
           >
-            <i className="bx bx-smile" />
+            <i id="emojiBtn" className="bx bx-smile" />
           </button>
           <input
             onKeyPress={onKeyPress}
@@ -70,7 +70,7 @@ function MessageForm(props) {
             placeholder="Type a message"
           />
           <button className={classes.SendButton} type="submit">
-            <i className="bx bx-send" />
+            <i className="bx bxs-send" />
           </button>
         </form>
       </div>

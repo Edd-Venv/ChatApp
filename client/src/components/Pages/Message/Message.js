@@ -102,7 +102,13 @@ function Message() {
 
   const emojiHandler = useCallback(() => {
     const emojiContainer = document.getElementById("picker");
-    if (emojiContainer) {
+    const emojiButton = document.getElementById("emojiBtn");
+
+    if (emojiContainer && emojiButton) {
+      if (emojiButton.className === "bx bx-smile")
+        emojiButton.className = "bx bx-down-arrow-alt";
+      else emojiButton.className = "bx bx-smile";
+
       emojiContainer.classList.toggle(messageFormClasses.ShowPicker);
       emojiContainer.scrollIntoView({ smooth: true });
     }
