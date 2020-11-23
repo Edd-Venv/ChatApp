@@ -17,7 +17,7 @@
   bottom: 16px;
   z-index: 40;
   max-width: 90vw;
-  border-radius: 14px;
+  border-radius: 40px;
   border: 12px solid #ffff;
 }
 
@@ -27,7 +27,7 @@
   outline: none;
   letter-spacing: 0.07rem;
   font-size: 0.9rem;
-  background-color: #f2f2f2;
+  background-color: #fff;
 }
 
 .AddButton {
@@ -37,7 +37,7 @@
   padding: 0.5rem;
   color: blue;
   background-color: #f7f6fb;
-  font-size: 1rem;
+  font-size: 1.2rem;
   cursor: pointer;
 }
 
