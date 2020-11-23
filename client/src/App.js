@@ -1,7 +1,7 @@
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable import/no-cycle */
 import "./App.css";
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import io from "socket.io-client";
 import { Route } from "react-router-dom";
 import Layout from "./containers/Layout/Layout";
@@ -12,7 +12,6 @@ import SignIn from "./components/Pages/SignIn/SignIn";
 import Contacts from "./components/Pages/Contacts/Contacts";
 import Home from "./components/Pages/Home/Home";
 import Settings from "./components/Pages/Settings/Settings";
-import { SocketContext } from "./contexts/socket/socketContext";
 import ForgotPassword from "./components/Pages/ForgotPwd/ForgotPwd";
 import ResetPassword from "./components/Pages/ResetPwd/ResetPwd";
 
@@ -20,18 +19,17 @@ export const socket = io("https://awschatapp.herokuapp.com");
 export const BaseUrl = "https://awschatapp.herokuapp.com";
 
 function App() {
-  const [, dispatch] = useContext(SocketContext);
   useEffect(() => {
     socket.on("connect", (data) => {
       console.log("app connected");
     });
 
-    socket.on("disconnect", () => {
+    socket.on("disconnect", (data) => {
+      console.log("disconnected data from server", data);
       socket.removeAllListeners();
     });
-
-    dispatch({ type: "SOCKET", socket });
   }, []);
+
   return (
     <ErrorBoundary>
       <Layout>

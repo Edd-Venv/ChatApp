@@ -44,7 +44,7 @@ function Message() {
       })
         .then((res) => res.json())
         .then((result) => {
-          if (result.message) console.log("err", result.message);
+          if (result.error) dispath({ type: "LOGOUT" });
           else {
             setTexts(result.texts);
           }

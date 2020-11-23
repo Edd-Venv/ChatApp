@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import PropTypes from "proptypes";
 import Logo from "../../../../UI/Logo/Logo";
 import classes from "./Contact.module.css";
@@ -9,7 +9,7 @@ function Contact(props) {
   const { contact, trackSelected } = props;
   const { person_name, person_image, id_uid } = contact;
   const { onlineUsers } = state;
-  console.log("onlineUsers", onlineUsers);
+
   const contactHandler = (selectedContact) => {
     if (state.selectedContact.id_uid === selectedContact.id_uid) return;
 
@@ -18,17 +18,22 @@ function Contact(props) {
   };
 
   useEffect(() => {
-    const onlineStatusHandler = () => {
-      const onlineIcon = document.getElementById("onlineStatus");
+    if (onlineUsers) {
+      const onlineStatusHandler = () => {
+        const onlineIcon = document.getElementById("onlineStatus");
 
-      for (let i = 0; i < onlineUsers.length; i++) {
-        if (onlineUsers[i] === id_uid) {
-          onlineIcon.style.color = "green";
+        for (let i = 0; i < onlineUsers.length; i++) {
+          if (onlineUsers[i] === id_uid) {
+            onlineIcon.style.color = "green";
+          }
+          if (onlineUsers[i] !== id_uid) {
+            onlineIcon.style.color = "red";
+          }
         }
-      }
-    };
-    onlineStatusHandler();
-  }, []);
+      };
+      onlineStatusHandler();
+    }
+  }, [onlineUsers]);
 
   return (
     <div

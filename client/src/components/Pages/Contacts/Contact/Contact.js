@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import PropTypes from "proptypes";
 import { Redirect } from "react-router-dom";
 import Logo from "../../../UI/Logo/Logo";
@@ -6,10 +6,29 @@ import classes from "./Contact.module.css";
 import { AuthContext } from "../../../../contexts/auth/authContext";
 
 function Contact(props) {
-  const [, dispath] = useContext(AuthContext);
+  const [state, dispath] = useContext(AuthContext);
   const [redirect, setRedirect] = useState(false);
   const { contact } = props;
   const { person_name, person_image, id_uid } = contact;
+  const { onlineUsers } = state;
+  console.log("mobile", state);
+  useEffect(() => {
+    if (onlineUsers) {
+      const onlineStatusHandler = () => {
+        const onlineIcon = document.getElementById("onlineStatus");
+
+        for (let i = 0; i < onlineUsers.length; i++) {
+          if (onlineUsers[i] === id_uid) {
+            onlineIcon.style.color = "green";
+          }
+          if (onlineUsers[i] !== id_uid) {
+            onlineIcon.style.color = "red";
+          }
+        }
+      };
+      onlineStatusHandler();
+    }
+  }, [onlineUsers]);
 
   const contactHandler = (selectedContact) => {
     dispath({ type: "SELECTEDCONTACT", selectedContact });
