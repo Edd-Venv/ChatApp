@@ -1,11 +1,11 @@
 /* eslint-disable indent */
 import React, { useContext, useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import Contact from "./Contact/Contact";
+import Contact from "./ContactMobile/ContactMobile";
 import { BaseUrl, socket } from "../../../App";
 import { AuthContext } from "../../../contexts/auth/authContext";
 import BackGroundClasses from "../../UI/Background/Background.module.css";
-import classes from "./Contacts.module.css";
+import classes from "./ContactsMobile.module.css";
 import Spinner from "../../UI/Spinner/BoxIcon/BoxIconSpinner";
 import SearchInput from "../../UI/SearchInput/SearchInput";
 

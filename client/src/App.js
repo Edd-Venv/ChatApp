@@ -9,7 +9,7 @@ import SignUp from "./components/Pages/SignUp/SignUp";
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 import Message from "./components/Pages/Message/Message";
 import SignIn from "./components/Pages/SignIn/SignIn";
-import Contacts from "./components/Pages/ContactsMobile/Contacts";
+import Contacts from "./components/Pages/ContactsMobile/ContactsMobile";
 import Home from "./components/Pages/Home/Home";
 import Settings from "./components/Pages/Settings/Settings";
 import ForgotPassword from "./components/Pages/ForgotPwd/ForgotPwd";

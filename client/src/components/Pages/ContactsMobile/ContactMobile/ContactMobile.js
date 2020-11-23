@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import PropTypes from "proptypes";
 import { Redirect } from "react-router-dom";
 import Logo from "../../../UI/Logo/Logo";
-import classes from "./Contact.module.css";
+import classes from "./ContactMobile.module.css";
 import { AuthContext } from "../../../../contexts/auth/authContext";
 
 function Contact(props) {

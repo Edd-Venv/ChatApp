@@ -129,7 +129,9 @@ function Message() {
 
   return (
     <div className={classes.Container}>
-      <Contacts />
+      <div className={classes.DesktopOnly}>
+        <Contacts />
+      </div>
       <MessageForm
         emojiHandler={emojiHandler}
         onKeyPress={onKeyPress}
