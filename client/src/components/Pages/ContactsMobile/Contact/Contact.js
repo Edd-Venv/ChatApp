@@ -15,7 +15,7 @@ function Contact(props) {
   useEffect(() => {
     if (onlineUsers) {
       const onlineStatusHandler = () => {
-        const onlineIcon = document.getElementById("onlineStatus");
+        const onlineIcon = document.getElementById("onlineStatusMobile");
 
         for (let i = 0; i < onlineUsers.length; i++) {
           if (onlineUsers[i] === id_uid) {
@@ -49,7 +49,7 @@ function Contact(props) {
       </div>
       <i
         className={`bx bxs-bullseye ${classes.OnlineIcon}`}
-        id="onlineStatus"
+        id="onlineStatusMobile"
       />
     </div>
   );
