@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React, { useContext, useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import Contact from "./Contact/Contact";
@@ -6,10 +7,12 @@ import { AuthContext } from "../../../contexts/auth/authContext";
 import BackGroundClasses from "../../UI/Background/Background.module.css";
 import classes from "./Contacts.module.css";
 import Spinner from "../../UI/Spinner/BoxIcon/BoxIconSpinner";
+import SearchInput from "../../UI/SearchInput/SearchInput";
 
 function Contacts() {
   const [state, dispath] = useContext(AuthContext);
   const [contacts, setContacts] = useState(null);
+  const [filter, setFilter] = useState("");
   const { jwt, userId, userName, authenticated } = state;
 
   useEffect(() => {
@@ -37,6 +40,12 @@ function Contacts() {
     </>
   );
 
+  const filteredContacts = !filter
+    ? contacts
+    : contacts.filter((contact) => {
+        return contact.person_name.toLowerCase().includes(filter.toLowerCase());
+      });
+
   if (!contacts) return <Spinner />;
 
   if (contacts) {
@@ -47,7 +56,12 @@ function Contacts() {
     <>
       <div className={BackGroundClasses.BackGroundImg} />
       <div className={classes.Container}>
-        {contacts.map((contact) => {
+        <SearchInput
+          handleChange={(event) => setFilter(event.target.value)}
+          value={filter}
+          placeHolder="Contact name"
+        />
+        {filteredContacts.map((contact) => {
           if (contact)
             return (
               <div key={contact.id_uid}>

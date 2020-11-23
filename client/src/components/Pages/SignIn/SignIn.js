@@ -18,6 +18,7 @@ function SignIn() {
     firstInputRef.current.focus();
     socket.on("sign-in", (data) => {
       console.log("dta from server", data);
+      dispath({ type: "ONLINESTATUS", onlineUsers: data });
     });
   }, []);
 

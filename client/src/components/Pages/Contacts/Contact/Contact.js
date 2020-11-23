@@ -23,8 +23,15 @@ function Contact(props) {
       className={classes.ContactBox}
       onClick={contactHandler.bind(this, contact)}
     >
-      <span>{person_name}</span>
       <Logo image={person_image} />
+      <div className={classes.ContactBoxInfo}>
+        <span className={classes.ContactName}>{person_name}</span>
+        <small>Status: Hi there</small>
+      </div>
+      <i
+        className={`bx bxs-bullseye ${classes.OnlineIcon}`}
+        id="onlineStatus"
+      />
     </div>
   );
 }

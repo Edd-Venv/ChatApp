@@ -1,5 +1,6 @@
 .ContactBox {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   width: 270px;
   z-index: 20;
@@ -22,9 +23,33 @@
 .ContactBoxInfo {
   display: flex;
   flex-direction: column;
-  margin-left: 1.5vw;
+  margin-left: -6.5vw;
 }
+.OnlineIcon {
+  color: red;
+  font-size: 1.2rem;
+  align-self: flex-start;
+}
+
 .ContactName {
   font-size: 700;
   font-weight: bolder;
+}
+
+@media (min-width: 700px) {
+  .ContactBoxInfo {
+    margin-left: -6.5vw;
+  }
+}
+
+@media (min-width: 1000px) {
+  .ContactBoxInfo {
+    margin-left: -4.5vw;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ContactBoxInfo {
+    margin-left: -3.5vw;
+  }
 }
