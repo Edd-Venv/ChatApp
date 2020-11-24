@@ -15,12 +15,18 @@ import Home from "./components/Pages/Home/Home";
 import Settings from "./components/Pages/Settings/Settings";
 import ForgotPassword from "./components/Pages/ForgotPwd/ForgotPwd";
 import ResetPassword from "./components/Pages/ResetPwd/ResetPwd";
+import messageHandler, {
+  getDate,
+  typingFeedbackHandler,
+} from "./components/Pages/Utils/Utils";
 
 export const socket = io("https://awschatapp.herokuapp.com");
 export const BaseUrl = "https://awschatapp.herokuapp.com";
 
 function App() {
   const [state, dispatch] = useContext(AuthContext);
+  const { selectedContact, userImage } = state;
+
   useEffect(() => {
     socket.on("connect", (data) => {
       console.log("app connected");
@@ -39,9 +45,37 @@ function App() {
       socket.removeAllListeners();
     });
 
+    socket.on("received-message", (dta) => {
+      typingFeedbackHandler("NOTTYPING");
+      messageHandler(
+        dta.message,
+        dta.from.userName,
+        "recieved",
+        dta.timeStamp,
+        selectedContact.person_image
+      );
+    });
+
+    socket.on("sent-message", (info) => {
+      messageHandler(
+        info.message,
+        info.from.userName,
+        "sent",
+        info.timeStamp,
+        userImage
+      );
+    });
+
+    socket.on("typing", (info) => {
+      typingFeedbackHandler("TYPING", info);
+    });
+
     return () => {
       socket.off("online-users-mobile");
       socket.off("online-users-desktop");
+      socket.off("received-message");
+      socket.off("sent-message");
+      socket.off("typing");
     };
   }, []);
 

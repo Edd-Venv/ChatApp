@@ -6,7 +6,6 @@ import React, {
   useCallback,
 } from "react";
 import { Redirect } from "react-router-dom";
-import { SocketContext } from "../../../contexts/socket/socketContext";
 import { AuthContext } from "../../../contexts/auth/authContext";
 import { BaseUrl, socket } from "../../../App";
 import MessageForm from "../../UI/Form/MessageForm/MessageForm";
@@ -17,7 +16,6 @@ import Contacts from "./DesktopContacts/Contacts";
 
 function Message() {
   const [state, dispath] = useContext(AuthContext);
-  const [socketState, socketDispath] = useContext(SocketContext);
   const [message, setMessage] = useState("");
   const [texts, setTexts] = useState([]);
   const {
