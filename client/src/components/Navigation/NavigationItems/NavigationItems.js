@@ -87,7 +87,7 @@ function NavigationItems() {
             <a
               href="https://github.com/Edd-Venv/MapApplication/tree/master/App"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className={classItem.Nav_link}
             >
               <i className={`bx bxl-github ${classes.Nav_icon}`} />

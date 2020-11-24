@@ -14,7 +14,7 @@ function signedInHome(props) {
             <h2>Your contact doesn&apos;t have an account ?</h2>
             <span>Share this link with them:</span>
             <span id="URL">
-              {`http://localhost:3000/sign-up/${userId}`}
+              {`https://edwinschatapp.netlify.app/sign-up/${userId}`}
               <i
                 id="copyURL"
                 className={`bx bx-clipboard ${classes.CopyIcon}`}
