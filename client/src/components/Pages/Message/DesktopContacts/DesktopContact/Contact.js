@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import PropTypes from "proptypes";
 import Logo from "../../../../UI/Logo/Logo";
 import classes from "./Contact.module.css";
@@ -9,7 +9,8 @@ function Contact(props) {
   const { contact, trackSelected } = props;
   const { person_name, person_image, id_uid } = contact;
   const { onlineUsers } = state;
-  console.log("onlineUsers", onlineUsers);
+  const contactID = `${id_uid}`;
+
   const contactHandler = (selectedContact) => {
     if (state.selectedContact.id_uid === selectedContact.id_uid) return;
 
@@ -19,16 +20,22 @@ function Contact(props) {
 
   useEffect(() => {
     const onlineStatusHandler = () => {
-      const onlineIcon = document.getElementById("onlineStatus");
+      const onlineIcon = document.getElementById(`onlineStatus-${id_uid}`);
 
       for (let i = 0; i < onlineUsers.length; i++) {
-        if (onlineUsers[i] === id_uid) {
+        if (onlineUsers[i] === contactID) {
           onlineIcon.style.color = "green";
+          break;
+        }
+        if (i === onlineUsers.length - 1) {
+          if (onlineUsers[i] !== contactID) {
+            onlineIcon.style.color = "red";
+          }
         }
       }
     };
     onlineStatusHandler();
-  }, []);
+  }, [onlineUsers]);
 
   return (
     <div
@@ -44,7 +51,7 @@ function Contact(props) {
       </div>
       <i
         className={`bx bxs-bullseye ${classes.OnlineIcon}`}
-        id="onlineStatus"
+        id={`onlineStatus-${id_uid}`}
       />
     </div>
   );

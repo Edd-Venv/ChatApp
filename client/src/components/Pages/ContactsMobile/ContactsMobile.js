@@ -1,16 +1,16 @@
 /* eslint-disable indent */
 import React, { useContext, useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import Contact from "./Contact/Contact";
-import { BaseUrl } from "../../../App";
+import Contact from "./ContactMobile/ContactMobile";
+import { BaseUrl, socket } from "../../../App";
 import { AuthContext } from "../../../contexts/auth/authContext";
 import BackGroundClasses from "../../UI/Background/Background.module.css";
-import classes from "./Contacts.module.css";
+import classes from "./ContactsMobile.module.css";
 import Spinner from "../../UI/Spinner/BoxIcon/BoxIconSpinner";
 import SearchInput from "../../UI/SearchInput/SearchInput";
 
 function Contacts() {
-  const [state, dispath] = useContext(AuthContext);
+  const [state, dispatch] = useContext(AuthContext);
   const [contacts, setContacts] = useState(null);
   const [filter, setFilter] = useState("");
   const { jwt, userId, userName, authenticated } = state;
@@ -26,9 +26,17 @@ function Contacts() {
     })
       .then((res) => res.json())
       .then((result) => {
-        if (result.message) console.log("err", result.message);
-        else setContacts(result.contacts);
+        if (result.status === "error") console.log("err", result.error);
+        if (result.status === "success") setContacts(result.contacts);
       });
+
+    socket.on("online-users-mobile", (data) => {
+      if (data) dispatch({ type: "ONLINESTATUS", onlineUsers: data });
+    });
+
+    return () => {
+      socket.off("online-users-mobile");
+    };
   }, []);
 
   if (!authenticated) return <Redirect to="/sign-in" />;

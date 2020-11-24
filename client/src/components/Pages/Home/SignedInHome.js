@@ -37,6 +37,7 @@ function signedInHome(props) {
                 onChange={handleChange}
                 id="inputID"
                 className={classes.Input}
+                placeholder="ac21-4801-..."
               />
               <button type="submit" className={classes.AddButton}>
                 <i className="bx bxs-book-add" />

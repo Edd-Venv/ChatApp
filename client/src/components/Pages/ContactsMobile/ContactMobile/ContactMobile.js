@@ -1,15 +1,38 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import PropTypes from "proptypes";
 import { Redirect } from "react-router-dom";
 import Logo from "../../../UI/Logo/Logo";
-import classes from "./Contact.module.css";
+import classes from "./ContactMobile.module.css";
 import { AuthContext } from "../../../../contexts/auth/authContext";
 
 function Contact(props) {
-  const [, dispath] = useContext(AuthContext);
+  const [state, dispath] = useContext(AuthContext);
   const [redirect, setRedirect] = useState(false);
   const { contact } = props;
   const { person_name, person_image, id_uid } = contact;
+  const { onlineUsers } = state;
+  const contactID = `${id_uid}`;
+
+  useEffect(() => {
+    const onlineStatusHandler = () => {
+      const onlineIcon = document.getElementById(
+        `onlineStatusMobile-${id_uid}`
+      );
+
+      for (let i = 0; i < onlineUsers.length; i++) {
+        if (onlineUsers[i] === contactID) {
+          onlineIcon.style.color = "green";
+          break;
+        }
+        if (i === onlineUsers.length - 1) {
+          if (onlineUsers[i] !== contactID) {
+            onlineIcon.style.color = "red";
+          }
+        }
+      }
+    };
+    onlineStatusHandler();
+  }, [onlineUsers]);
 
   const contactHandler = (selectedContact) => {
     dispath({ type: "SELECTEDCONTACT", selectedContact });
@@ -30,7 +53,7 @@ function Contact(props) {
       </div>
       <i
         className={`bx bxs-bullseye ${classes.OnlineIcon}`}
-        id="onlineStatus"
+        id={`onlineStatusMobile-${id_uid}`}
       />
     </div>
   );

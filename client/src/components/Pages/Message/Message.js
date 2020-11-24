@@ -6,18 +6,16 @@ import React, {
   useCallback,
 } from "react";
 import { Redirect } from "react-router-dom";
-import { SocketContext } from "../../../contexts/socket/socketContext";
 import { AuthContext } from "../../../contexts/auth/authContext";
 import { BaseUrl, socket } from "../../../App";
 import MessageForm from "../../UI/Form/MessageForm/MessageForm";
 import messageHandler, { getDate, typingFeedbackHandler } from "../Utils/Utils";
 import classes from "./Message.module.css";
 import messageFormClasses from "../../UI/Form/MessageForm/MessageForm.module.css";
-import Contacts from "./Contacts/Contacts";
+import Contacts from "./DesktopContacts/Contacts";
 
 function Message() {
   const [state, dispath] = useContext(AuthContext);
-  const [socketState, socketDispath] = useContext(SocketContext);
   const [message, setMessage] = useState("");
   const [texts, setTexts] = useState([]);
   const {
@@ -44,7 +42,7 @@ function Message() {
       })
         .then((res) => res.json())
         .then((result) => {
-          if (result.message) console.log("err", result.message);
+          if (result.error) dispath({ type: "LOGOUT" });
           else {
             setTexts(result.texts);
           }
@@ -129,7 +127,9 @@ function Message() {
 
   return (
     <div className={classes.Container}>
-      <Contacts />
+      <div className={classes.DesktopOnly}>
+        <Contacts />
+      </div>
       <MessageForm
         emojiHandler={emojiHandler}
         onKeyPress={onKeyPress}
