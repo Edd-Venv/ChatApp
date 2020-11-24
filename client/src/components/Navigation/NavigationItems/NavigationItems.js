@@ -73,6 +73,27 @@ function NavigationItems() {
           {signUp}
           {signOut}
           {settings}
+          <li className={classItem.Nav_logo}>
+            <a
+              href="https://edwinushibantu.netlify.app/#work"
+              className={classItem.Nav_link}
+            >
+              {" "}
+              <i className={`bx bx-library ${classes.Nav_icon}`} />
+              <span className={classes.Nav_logo_name}>Applications </span>
+            </a>
+          </li>
+          <li className={classItem.Nav_logo}>
+            <a
+              href="https://github.com/Edd-Venv/MapApplication/tree/master/App"
+              target="_blank"
+              rel="noreferrer"
+              className={classItem.Nav_link}
+            >
+              <i className={`bx bxl-github ${classes.Nav_icon}`} />
+              <span className={classes.Nav_logo_name}>GitHub</span>
+            </a>
+          </li>
         </div>
       </nav>
     </div>
