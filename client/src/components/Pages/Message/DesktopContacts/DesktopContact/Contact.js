@@ -21,18 +21,18 @@ function Contact(props) {
   useEffect(() => {
     const onlineStatusHandler = () => {
       const onlineIcon = document.getElementById(`onlineStatus-${id_uid}`);
-
-      for (let i = 0; i < onlineUsers.length; i++) {
-        if (onlineUsers[i] === contactID) {
-          onlineIcon.style.color = "green";
-          break;
-        }
-        if (i === onlineUsers.length - 1) {
-          if (onlineUsers[i] !== contactID) {
-            onlineIcon.style.color = "red";
+      if (onlineUsers)
+        for (let i = 0; i < onlineUsers.length; i++) {
+          if (onlineUsers[i] === contactID) {
+            onlineIcon.style.color = "green";
+            break;
+          }
+          if (i === onlineUsers.length - 1) {
+            if (onlineUsers[i] !== contactID) {
+              onlineIcon.style.color = "red";
+            }
           }
         }
-      }
     };
     onlineStatusHandler();
   }, [onlineUsers]);
@@ -47,7 +47,7 @@ function Contact(props) {
       <Logo image={person_image} />
       <div className={classes.ContactBoxInfo}>
         <span className={classes.ContactName}>{person_name}</span>
-        <small>Status: Hi there</small>
+        <small className={classes.Small}>Status: Hi there</small>
       </div>
       <i
         className={`bx bxs-bullseye ${classes.OnlineIcon}`}

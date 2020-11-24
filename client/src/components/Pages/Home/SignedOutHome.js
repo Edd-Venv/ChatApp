@@ -15,8 +15,8 @@ function signedOutHome() {
             <br />
             Therefore it requries you to create two accounts.
             <br />
-            Create the first account then sign in and it will guide you on how
-            to create the second account.
+            Please create the first account then sign in and it will guide you
+            on how to create the second account.
             <br />
             <br />
             <Link to="/sign-up/none">

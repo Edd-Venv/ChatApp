@@ -46,7 +46,9 @@ function MessageForm(props) {
 
   return (
     <>
-      <div className={BackGroundClasses.BackGroundImg} />
+      <div className={classes.MobileOnly}>
+        <div className={BackGroundClasses.BackGroundImg} />
+      </div>
       <div className={classes.Container}>
         <ul id="ul" className={classes.UL} />
         <div id="feedback" />
