@@ -11,23 +11,27 @@ function Contact(props) {
   const { contact } = props;
   const { person_name, person_image, id_uid } = contact;
   const { onlineUsers } = state;
-  console.log("mobile", state);
-  useEffect(() => {
-    if (onlineUsers) {
-      const onlineStatusHandler = () => {
-        const onlineIcon = document.getElementById("onlineStatusMobile");
+  const contactID = `${id_uid}`;
 
-        for (let i = 0; i < onlineUsers.length; i++) {
-          if (onlineUsers[i] === id_uid) {
-            onlineIcon.style.color = "green";
-          }
-          if (onlineUsers[i] !== id_uid) {
+  useEffect(() => {
+    const onlineStatusHandler = () => {
+      const onlineIcon = document.getElementById(
+        `onlineStatusMobile-${id_uid}`
+      );
+
+      for (let i = 0; i < onlineUsers.length; i++) {
+        if (onlineUsers[i] === contactID) {
+          onlineIcon.style.color = "green";
+          break;
+        }
+        if (i === onlineUsers.length - 1) {
+          if (onlineUsers[i] !== contactID) {
             onlineIcon.style.color = "red";
           }
         }
-      };
-      onlineStatusHandler();
-    }
+      }
+    };
+    onlineStatusHandler();
   }, [onlineUsers]);
 
   const contactHandler = (selectedContact) => {
@@ -49,7 +53,7 @@ function Contact(props) {
       </div>
       <i
         className={`bx bxs-bullseye ${classes.OnlineIcon}`}
-        id="onlineStatusMobile"
+        id={`onlineStatusMobile-${id_uid}`}
       />
     </div>
   );

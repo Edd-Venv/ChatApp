@@ -9,6 +9,7 @@ function Contact(props) {
   const { contact, trackSelected } = props;
   const { person_name, person_image, id_uid } = contact;
   const { onlineUsers } = state;
+  const contactID = `${id_uid}`;
 
   const contactHandler = (selectedContact) => {
     if (state.selectedContact.id_uid === selectedContact.id_uid) return;
@@ -18,22 +19,22 @@ function Contact(props) {
   };
 
   useEffect(() => {
-    console.log("desktop version contact.js", onlineUsers);
-    if (onlineUsers) {
-      const onlineStatusHandler = () => {
-        const onlineIcon = document.getElementById("onlineStatus");
+    const onlineStatusHandler = () => {
+      const onlineIcon = document.getElementById(`onlineStatus-${id_uid}`);
 
-        for (let i = 0; i < onlineUsers.length; i++) {
-          if (onlineUsers[i] === id_uid) {
-            onlineIcon.style.color = "green";
-          }
-          if (onlineUsers[i] !== id_uid) {
+      for (let i = 0; i < onlineUsers.length; i++) {
+        if (onlineUsers[i] === contactID) {
+          onlineIcon.style.color = "green";
+          break;
+        }
+        if (i === onlineUsers.length - 1) {
+          if (onlineUsers[i] !== contactID) {
             onlineIcon.style.color = "red";
           }
         }
-      };
-      onlineStatusHandler();
-    }
+      }
+    };
+    onlineStatusHandler();
   }, [onlineUsers]);
 
   return (
@@ -50,7 +51,7 @@ function Contact(props) {
       </div>
       <i
         className={`bx bxs-bullseye ${classes.OnlineIcon}`}
-        id="onlineStatus"
+        id={`onlineStatus-${id_uid}`}
       />
     </div>
   );

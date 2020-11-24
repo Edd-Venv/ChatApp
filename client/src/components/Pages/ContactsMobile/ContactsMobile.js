@@ -30,13 +30,12 @@ function Contacts() {
         if (result.status === "success") setContacts(result.contacts);
       });
 
-    socket.on("online-users", (data) => {
-      console.log("contacts mobile version", data);
-      dispatch({ type: "ONLINESTATUS", onlineUsers: data });
+    socket.on("online-users-mobile", (data) => {
+      if (data) dispatch({ type: "ONLINESTATUS", onlineUsers: data });
     });
 
     return () => {
-      socket.off("online-users");
+      socket.off("online-users-mobile");
     };
   }, []);
 

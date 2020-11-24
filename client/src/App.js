@@ -1,9 +1,10 @@
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable import/no-cycle */
 import "./App.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import io from "socket.io-client";
 import { Route } from "react-router-dom";
+import { AuthContext } from "./contexts/auth/authContext";
 import Layout from "./containers/Layout/Layout";
 import SignUp from "./components/Pages/SignUp/SignUp";
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
@@ -19,15 +20,29 @@ export const socket = io("https://awschatapp.herokuapp.com");
 export const BaseUrl = "https://awschatapp.herokuapp.com";
 
 function App() {
+  const [state, dispatch] = useContext(AuthContext);
   useEffect(() => {
     socket.on("connect", (data) => {
       console.log("app connected");
+    });
+
+    socket.on("online-users-mobile", (data) => {
+      if (data) dispatch({ type: "ONLINESTATUS", onlineUsers: data });
+    });
+
+    socket.on("online-users-desktop", (data) => {
+      if (data) dispatch({ type: "ONLINESTATUS", onlineUsers: data });
     });
 
     socket.on("disconnect", (data) => {
       console.log("disconnected data from server", data);
       socket.removeAllListeners();
     });
+
+    return () => {
+      socket.off("online-users-mobile");
+      socket.off("online-users-desktop");
+    };
   }, []);
 
   return (

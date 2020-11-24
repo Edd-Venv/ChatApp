@@ -4,7 +4,7 @@ import Contact from "./DesktopContact/Contact";
 import { BaseUrl, socket } from "../../../../App";
 import { AuthContext } from "../../../../contexts/auth/authContext";
 import classes from "./Contacts.module.css";
-import contactClasses from "./Contact/Contact.module.css";
+import contactClasses from "./DesktopContact/Contact.module.css";
 import Spinner from "../../../UI/Spinner/BoxIcon/BoxIconSpinner";
 import SearchInput from "../../../UI/SearchInput/SearchInput";
 
@@ -29,13 +29,12 @@ function Contacts() {
         if (result.status === "success") setContacts(result.contacts);
       });
 
-    socket.on("online-users", (data) => {
-      console.log("contacts desktop versyion", data);
-      dispatch({ type: "ONLINESTATUS", onlineUsers: data });
+    socket.on("online-users-desktop", (data) => {
+      if (data) dispatch({ type: "ONLINESTATUS", onlineUsers: data });
     });
 
     return () => {
-      socket.off("online-users");
+      socket.off("online-users-desktop");
     };
   }, []);
 
