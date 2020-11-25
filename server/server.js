@@ -2,14 +2,7 @@
 const app = require("./app");
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
-/*
-io.on("connect", (socket) => {
-  console.log("a user connected");
-  console.log("socket", socket);
-   const { id } = socket.handshake.query;
-  socket.join(id);
-});
-*/
+
 
 io.on("connection", (socket) => {
   console.log("beforesockekId", socket.id);
