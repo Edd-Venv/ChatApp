@@ -7,7 +7,8 @@
   right: 0;
   position: fixed;
   overflow-y: auto;
-  background-color: black;
+  background-color: #2c2c34;
+  box-shadow: 10px -20px 20px 1px #24252a;
   height: 100vh;
 }
 
@@ -25,7 +26,6 @@
   .Container {
     height: 90vh;
     width: 44vw;
-    background-color: rgba(0, 0, 0, 0.397);
   }
 }
 
@@ -38,6 +38,7 @@
 
 @media (min-width: 1300px) {
   .Container {
-    margin-left: -9vw;
+    margin-left: -4vw;
+    width: 30vw;
   }
 }

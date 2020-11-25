@@ -18,18 +18,18 @@ function Contact(props) {
       const onlineIcon = document.getElementById(
         `onlineStatusMobile-${id_uid}`
       );
-
-      for (let i = 0; i < onlineUsers.length; i++) {
-        if (onlineUsers[i] === contactID) {
-          onlineIcon.style.color = "green";
-          break;
-        }
-        if (i === onlineUsers.length - 1) {
-          if (onlineUsers[i] !== contactID) {
-            onlineIcon.style.color = "red";
+      if (onlineUsers)
+        for (let i = 0; i < onlineUsers.length; i++) {
+          if (onlineUsers[i] === contactID) {
+            onlineIcon.style.color = "green";
+            break;
+          }
+          if (i === onlineUsers.length - 1) {
+            if (onlineUsers[i] !== contactID) {
+              onlineIcon.style.color = "red";
+            }
           }
         }
-      }
     };
     onlineStatusHandler();
   }, [onlineUsers]);
