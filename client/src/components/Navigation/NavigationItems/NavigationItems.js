@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import classes from "./NavigationItems.module.css";
 import NavigationItem from "./NavigationItem/NavigationItem";
 import { AuthContext } from "../../../contexts/auth/authContext";
@@ -85,7 +85,7 @@ function NavigationItems() {
           </li>
           <li className={classItem.Nav_logo}>
             <a
-              href="https://github.com/Edd-Venv/MapApplication/tree/master/App"
+              href="/"
               target="_blank"
               rel="noopener noreferrer"
               className={classItem.Nav_link}

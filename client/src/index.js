@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { AuthContextProvider } from "./contexts/auth/authContext";
 
 if (!localStorage.getItem("userImage") || !localStorage.getItem("username")) {
@@ -11,11 +11,11 @@ if (!localStorage.getItem("userImage") || !localStorage.getItem("username")) {
 }
 
 const app = (
-  <BrowserRouter>
+  <HashRouter>
     <AuthContextProvider>
       <App />
     </AuthContextProvider>
-  </BrowserRouter>
+  </HashRouter>
 );
 
 ReactDOM.render(app, document.getElementById("root"));

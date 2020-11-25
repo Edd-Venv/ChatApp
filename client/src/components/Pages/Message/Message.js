@@ -6,6 +6,7 @@ import React, {
   useCallback,
 } from "react";
 import { Redirect } from "react-router-dom";
+import { motion } from "framer-motion";
 import { AuthContext } from "../../../contexts/auth/authContext";
 import { BaseUrl, socket } from "../../../App";
 import MessageForm from "../../UI/Form/MessageForm/MessageForm";
@@ -13,6 +14,7 @@ import messageHandler, { getDate, typingFeedbackHandler } from "../Utils/Utils";
 import classes from "./Message.module.css";
 import messageFormClasses from "../../UI/Form/MessageForm/MessageForm.module.css";
 import Contacts from "./DesktopContacts/Contacts";
+import Varients from "../Utils/Varients";
 
 function Message() {
   const [state, dispath] = useContext(AuthContext);
@@ -126,7 +128,12 @@ function Message() {
   if (!authenticated) return <Redirect to="/sign-in" />;
 
   return (
-    <div className={classes.Container}>
+    <motion.div
+      className={classes.Container}
+      variants={Varients}
+      initial="hidden"
+      animate="visible"
+    >
       <div className={classes.DesktopOnly}>
         <Contacts />
       </div>
@@ -140,7 +147,7 @@ function Message() {
         state={state}
         onEmojiClick={onEmojiClick}
       />
-    </div>
+    </motion.div>
   );
 }
 

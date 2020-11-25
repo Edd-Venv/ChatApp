@@ -1,5 +1,7 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import Varients from "../Utils/Varients";
 import classes from "./Home.module.css";
 import backgroundClasses from "../../UI/Background/Background.module.css";
 
@@ -7,7 +9,12 @@ function signedOutHome() {
   return (
     <>
       <div className={backgroundClasses.BackGroundImg} />
-      <section className={classes.Instructions}>
+      <motion.section
+        variants={Varients}
+        initial="hidden"
+        animate="visible"
+        className={classes.Instructions}
+      >
         <div className={classes.InstructionsContainer}>
           <h1>Instructions</h1>
           <p className={classes.InstructionsParagraph}>
@@ -28,7 +35,7 @@ function signedOutHome() {
             </Link>
           </p>
         </div>
-      </section>
+      </motion.section>
     </>
   );
 }

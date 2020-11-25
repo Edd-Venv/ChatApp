@@ -24,11 +24,11 @@ function ResetPassword() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const token = window.location.pathname.split("/")[2];
+    const token = window.location.hash.split("/")[3];
 
     if (newPassword === confirmPassword) {
       fetch(`${BaseUrl}/reset/password/${token}`, {
-        method: "PUT",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
