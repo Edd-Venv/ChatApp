@@ -12,6 +12,4 @@ function Toolbar() {
   );
 }
 
-// clicked={props.drawerToggleClicked}  className={classes.DesktopOnly} logOut={props.logOut}
-//  <Logo />
 export default Toolbar;

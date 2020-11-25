@@ -16,12 +16,11 @@ import Settings from "./components/Pages/Settings/Settings";
 import ForgotPassword from "./components/Pages/ForgotPwd/ForgotPwd";
 import ResetPassword from "./components/Pages/ResetPwd/ResetPwd";
 import messageHandler, {
-  getDate,
   typingFeedbackHandler,
 } from "./components/Pages/Utils/Utils";
 
-export const socket = io("https://awschatapp.herokuapp.com");
-export const BaseUrl = "https://awschatapp.herokuapp.com";
+export const socket = io("");
+export const BaseUrl = "";
 
 function App() {
   const [state, dispatch] = useContext(AuthContext);

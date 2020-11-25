@@ -98,6 +98,6 @@ function NavigationItems() {
       </nav>
     </div>
   );
-} // <i class='bx bx-home'></i>
+}
 
 export default NavigationItems;
