@@ -7,7 +7,7 @@ export const initialState = {
   isLoaded: false,
   authenticated: false,
   userId: null,
-  selectedContact: { id_uid: "dummy" },
+  selectedContact: { id_uid: "dummy", person_image: "default.jpg" },
   userImage: "default.jpg",
   jwt: null,
 };

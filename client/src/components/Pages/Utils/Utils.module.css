@@ -1,13 +1,24 @@
+.Left {
+  display: flex;
+  align-self: flex-start;
+}
+
+.Right {
+  display: flex;
+  align-self: flex-end;
+}
+
 .LeftTextBox {
-  border: 2px solid;
   z-index: 20;
   font-family: "Montserrat", sans-serif;
-  background-color: #f2f2f2;
+  background-color: #202126;
+  color: white;
+  border: none;
   padding: 0.7rem 0.7rem;
   border-radius: 1rem;
   border-top-left-radius: 0rem;
   text-align: start;
-  box-shadow: 0 8px 20px rgba(35, 0, 77, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
   width: fit-content;
   align-self: flex-start;
   overflow-wrap: break-word;
@@ -17,15 +28,16 @@
 }
 
 .RightTextBox {
-  border: 2px solid;
   z-index: 20;
   font-family: "Montserrat", sans-serif;
-  background-color: #f2f2f2;
+  background-color: #a73229;
+  color: white;
+  border: none;
   padding: 0.7rem 0.7rem;
   border-radius: 1rem;
   border-top-right-radius: 0rem;
   text-align: start;
-  box-shadow: 0 8px 20px rgba(35, 0, 77, 0.2);
+  box-shadow: 0 8px 20px rgba(22, 0, 0, 0.05);
   width: fit-content;
   align-self: flex-end;
   overflow-wrap: break-word;
@@ -46,4 +58,42 @@
 
 .Small {
   align-self: flex-end;
+}
+
+@media (min-width: 300px) {
+  .Img {
+    width: 7vw;
+    align-self: end;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    z-index: 20;
+  }
+}
+
+@media (min-width: 400px) {
+  .Img {
+    width: 7vw;
+  }
+}
+@media (min-width: 500px) {
+  .Img {
+    width: 8vw;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+  }
+}
+@media (min-width: 700px) {
+  .Img {
+    width: 3vw;
+  }
+}
+
+@media (min-width: 1440px) {
+  .Img {
+    width: 2vw;
+  }
 }

@@ -5,11 +5,35 @@
   list-style-type: none;
   padding-bottom: 60px;
 }
+.Typing {
+  background-color: rgba(0, 0, 0, 0.45);
+  border: 2px solid;
+  z-index: 20;
+  padding: 0.1rem 0.7rem;
+  border-radius: 1rem;
+  border-top-left-radius: 0rem;
+  width: fit-content;
+  margin: 0.3rem;
+  margin-bottom: 11vh;
+  color: #f7f6fb;
+  display: flex;
+}
 
 .Container {
   display: flex;
   flex-direction: column;
   max-width: 90vw;
+}
+
+.PickerContainer {
+  display: none;
+  z-index: 30;
+  align-self: center;
+}
+
+.ShowPicker {
+  display: block;
+  padding-bottom: 80px;
 }
 
 .Form {
@@ -18,8 +42,9 @@
   bottom: 16px;
   z-index: 40;
   max-width: 90vw;
-  border-radius: 14px;
+  border-radius: 50px;
   border: 12px solid #ffff;
+  background-color: white;
 }
 
 .Input {
@@ -28,7 +53,7 @@
   outline: none;
   letter-spacing: 0.07rem;
   font-size: 0.9rem;
-  background-color: #f2f2f2;
+  background-color: #ffff;
 }
 
 .SendButton {
@@ -36,10 +61,12 @@
   display: flex;
   align-items: center;
   padding: 0.5rem;
-  color: #4723d9;
+  color: #2329d9;
   background-color: #f7f6fb;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   cursor: pointer;
+  outline: none;
+  border-radius: 40px;
 }
 
 .NoMessages {
@@ -47,11 +74,17 @@
   z-index: 20;
   font-size: larger;
 }
-
+@media (max-width: 700px) {
+  .MobileOnly {
+    display: block;
+  }
+}
 @media (min-width: 700px) {
+  .MobileOnly {
+    display: none;
+  }
   .Container {
     max-width: 50vw;
-
     width: 100vw;
     margin-left: auto;
   }
@@ -68,10 +101,20 @@
 
 @media (min-width: 1000px) {
   .Container {
-    max-width: 40vw;
-    margin-left: 32vw;
+    max-width: 46vw;
+    margin-left: 36vw;
   }
   .Form {
-    max-width: 40vw;
+    max-width: 46vw;
+  }
+}
+
+@media (min-width: 1300px) {
+  .Container {
+    max-width: 46vw;
+    margin-left: 34vw;
+  }
+  .Form {
+    max-width: 46vw;
   }
 }

@@ -1,5 +1,6 @@
 const AUTH = "AUTH";
 const SELECTEDCONTACT = "SELECTEDCONTACT";
+const ONLINESTATUS = "ONLINESTATUS";
 const RESETSELECTEDCONTACT = "RESETSELECTEDCONTACT";
 const LOGOUT = "LOGOUT";
 
@@ -15,6 +16,7 @@ const authReducer = (state, action) => {
       newState.userImage = action.userImage;
       return newState;
     }
+
     case SELECTEDCONTACT: {
       const { id_uid, person_name, person_image } = action.selectedContact;
       const newState = Object.assign({}, state);
@@ -26,11 +28,18 @@ const authReducer = (state, action) => {
       };
       return newState;
     }
+
     case RESETSELECTEDCONTACT: {
       const newState = Object.assign({}, state);
       newState.selectedContact = {
         id_uid: "dummy",
       };
+      return newState;
+    }
+
+    case ONLINESTATUS: {
+      const newState = Object.assign({}, state);
+      newState.onlineUsers = action.onlineUsers;
       return newState;
     }
 

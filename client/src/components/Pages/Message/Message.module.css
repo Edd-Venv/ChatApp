@@ -3,10 +3,19 @@
   flex-direction: row;
 }
 
+.DesktopOnly {
+  display: none;
+}
+
 .ContactsContainer {
   display: block;
 }
 
+@media (min-width: 700px) {
+  .DesktopOnly {
+    display: block;
+  }
+}
 @media (max-width: 700px) {
   .Container {
     display: block;

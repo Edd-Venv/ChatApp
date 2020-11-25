@@ -1,14 +1,17 @@
+/* eslint-disable indent */
 import React, { useContext, useState, useEffect } from "react";
-import Contact from "./Contact/Contact";
-import { BaseUrl } from "../../../../App";
+import Contact from "./DesktopContact/Contact";
+import { BaseUrl, socket } from "../../../../App";
 import { AuthContext } from "../../../../contexts/auth/authContext";
 import classes from "./Contacts.module.css";
-import contactClasses from "./Contact/Contact.module.css";
+import contactClasses from "./DesktopContact/Contact.module.css";
 import Spinner from "../../../UI/Spinner/BoxIcon/BoxIconSpinner";
+import SearchInput from "../../../UI/SearchInput/SearchInput";
 
 function Contacts() {
-  const [state, dispath] = useContext(AuthContext);
-  const [contacts, setContacts] = useState([]);
+  const [state, dispatch] = useContext(AuthContext);
+  const [contacts, setContacts] = useState(null);
+  const [filter, setFilter] = useState("");
   const { jwt, userId, userName } = state;
 
   useEffect(() => {
@@ -22,9 +25,17 @@ function Contacts() {
     })
       .then((res) => res.json())
       .then((result) => {
-        if (result.message) console.log("err", result.message);
-        else setContacts(result.contacts);
+        if (result.status === "error") dispatch({ type: "LOGOUT" });
+        if (result.status === "success") setContacts(result.contacts);
       });
+
+    socket.on("online-users-desktop", (data) => {
+      if (data) dispatch({ type: "ONLINESTATUS", onlineUsers: data });
+    });
+
+    return () => {
+      socket.off("online-users-desktop");
+    };
   }, []);
 
   const trackSelected = (id) => {
@@ -43,6 +54,12 @@ function Contacts() {
       ).className = contactClasses.ContactBox;
   };
 
+  const filteredContacts = !filter
+    ? contacts
+    : contacts.filter((contact) => {
+        return contact.person_name.toLowerCase().includes(filter.toLowerCase());
+      });
+
   const noContacts = (
     <>
       <h2 className={classes.NoContacts}>Please add contacts.</h2>
@@ -58,13 +75,13 @@ function Contacts() {
   return (
     <>
       <div className={classes.Container}>
-        <h2
-          className={contactClasses.ContactBox}
-          style={{ height: "fit-content" }}
-        >
-          Contacts
-        </h2>
-        {contacts.map((contact) => {
+        <SearchInput
+          handleChange={(event) => setFilter(event.target.value)}
+          value={filter}
+          placeHolder="Contact name"
+        />
+
+        {filteredContacts.map((contact) => {
           if (contact)
             return (
               <div key={contact.id_uid}>
@@ -78,6 +95,4 @@ function Contacts() {
   );
 }
 
-export default React.memo(Contacts);
-
-//  (prevProps, nextProps) => prevProps === nextProps
+export default Contacts;

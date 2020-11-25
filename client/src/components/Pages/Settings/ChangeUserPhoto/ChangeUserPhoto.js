@@ -27,7 +27,9 @@ function ChangeUserPhoto(props) {
       changePhoto(`${BaseUrl}/account/settings/update/user-picture`, formData)
         .then((result) => result.json())
         .then((response) => {
-          if (response.status === "successs") signOut();
+          if (response.status === "success") signOut();
+
+          return null;
         });
   };
 

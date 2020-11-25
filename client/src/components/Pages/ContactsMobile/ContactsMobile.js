@@ -1,15 +1,18 @@
+/* eslint-disable indent */
 import React, { useContext, useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import Contact from "./Contact/Contact";
-import { BaseUrl } from "../../../App";
+import Contact from "./ContactMobile/ContactMobile";
+import { BaseUrl, socket } from "../../../App";
 import { AuthContext } from "../../../contexts/auth/authContext";
 import BackGroundClasses from "../../UI/Background/Background.module.css";
-import classes from "./Contacts.module.css";
+import classes from "./ContactsMobile.module.css";
 import Spinner from "../../UI/Spinner/BoxIcon/BoxIconSpinner";
+import SearchInput from "../../UI/SearchInput/SearchInput";
 
 function Contacts() {
-  const [state, dispath] = useContext(AuthContext);
-  const [contacts, setContacts] = useState([]);
+  const [state, dispatch] = useContext(AuthContext);
+  const [contacts, setContacts] = useState(null);
+  const [filter, setFilter] = useState("");
   const { jwt, userId, userName, authenticated } = state;
 
   useEffect(() => {
@@ -23,9 +26,17 @@ function Contacts() {
     })
       .then((res) => res.json())
       .then((result) => {
-        if (result.message) console.log("err", result.message);
-        else setContacts(result.contacts);
+        if (result.status === "error") console.log("err", result.error);
+        if (result.status === "success") setContacts(result.contacts);
       });
+
+    socket.on("online-users-mobile", (data) => {
+      if (data) dispatch({ type: "ONLINESTATUS", onlineUsers: data });
+    });
+
+    return () => {
+      socket.off("online-users-mobile");
+    };
   }, []);
 
   if (!authenticated) return <Redirect to="/sign-in" />;
@@ -37,6 +48,12 @@ function Contacts() {
     </>
   );
 
+  const filteredContacts = !filter
+    ? contacts
+    : contacts.filter((contact) => {
+        return contact.person_name.toLowerCase().includes(filter.toLowerCase());
+      });
+
   if (!contacts) return <Spinner />;
 
   if (contacts) {
@@ -47,7 +64,12 @@ function Contacts() {
     <>
       <div className={BackGroundClasses.BackGroundImg} />
       <div className={classes.Container}>
-        {contacts.map((contact) => {
+        <SearchInput
+          handleChange={(event) => setFilter(event.target.value)}
+          value={filter}
+          placeHolder="Contact name"
+        />
+        {filteredContacts.map((contact) => {
           if (contact)
             return (
               <div key={contact.id_uid}>

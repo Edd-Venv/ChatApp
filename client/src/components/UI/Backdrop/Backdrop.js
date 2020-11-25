@@ -1,18 +1,18 @@
 import React from "react";
 import navItemsClasses from "../../Navigation/NavigationItems/NavigationItems.module.css";
 import drawerToggleClasses from "../../Navigation/SideDrawer/DrawerToggle/DrawerToggle.module.css";
+import ToggleButton from "../Button/ToggleButton/ToggleButton";
 import classes from "./Backdrop.module.css";
 
 const backdrop = () => {
   const backDropHandler = () => {
     const nav = document.getElementById("nav-bar");
-    const drawerToggle = document.getElementById("drawer-toggle");
     const header = document.getElementById("header");
     const body = document.getElementById("bodypd");
     const backdropEl = document.getElementById("backdrop");
 
-    if (nav && drawerToggle && header && body && backdropEl) {
-      drawerToggle.classList.remove("bx-x");
+    if (nav && header && body && backdropEl) {
+      ToggleButton();
       nav.classList.toggle(navItemsClasses.Show);
       body.classList.toggle(drawerToggleClasses.Body_pd);
       header.classList.toggle(drawerToggleClasses.Body_pd);
