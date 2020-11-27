@@ -1,6 +1,6 @@
 # ChatApp
 
-Private message application, using we sockets.
+Private message application, using web sockets.
 
 Perfoms CRUD Opertaions.
 Has Authentication using JWT.
